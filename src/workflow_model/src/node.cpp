@@ -13,13 +13,13 @@ Node::Node(const std::string &name, WorkflowModel::NodeStatus status):
 
 }
 
-void Node::addChild(Node &node) {
+void Node::addChild(std::shared_ptr<Node> &node) {
     children_.push_back(node);
-    node.setParent(this);
+    node->setParent(shared_from_this());
 }
 
 std::string Node::nodePath() const {
-    auto cur_node = this;
+    auto cur_node = shared_from_this();
     std::vector<std::string> node_list;
     while (cur_node) {
         node_list.push_back(cur_node->name());
@@ -44,8 +44,8 @@ nlohmann::json Node::toJson() const {
     node_json["status"] = status_;
 
     std::vector<json> children_json_array;
-    for(auto child: children_){
-        auto child_json = child.toJson();
+    for(auto &child: children_){
+        auto child_json = child->toJson();
         children_json_array.push_back(child_json);
     }
     node_json["children"] = children_json_array;

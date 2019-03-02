@@ -3,6 +3,7 @@
 #include <Defs.hpp>
 
 struct NodeStatusRecord{
+    std::string name_;
     std::string path_;
     std::string status_;
 };
@@ -21,6 +22,7 @@ int main() {
 
     for(auto node: nodes) {
         NodeStatusRecord record;
+        record.name_ = node->name();
         record.path_ = node->absNodePath();
         record.status_ = DState::toString(node->dstate());
         records.push_back(record);

@@ -11,37 +11,61 @@ protected:
     virtual void TearDown(){}
 };
 
+using namespace ::WorkflowModel;
+
 TEST_F(NodeStatusTest, MethodGetNodeStatus){
-    EXPECT_EQ(WorkflowModel::getNodeStatus("unknown"), WorkflowModel::NodeStatus::unknown)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("unk"), WorkflowModel::NodeStatus::unknown)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("suspended"), WorkflowModel::NodeStatus::suspended)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("sus"), WorkflowModel::NodeStatus::suspended)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("complete"), WorkflowModel::NodeStatus::complete)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("com"), WorkflowModel::NodeStatus::complete)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("queued"), WorkflowModel::NodeStatus::queued)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("que"), WorkflowModel::NodeStatus::queued)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("submitted"), WorkflowModel::NodeStatus::submitted)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("sub"), WorkflowModel::NodeStatus::submitted)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("active"), WorkflowModel::NodeStatus::active)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("act"), WorkflowModel::NodeStatus::active)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("aborted"), WorkflowModel::NodeStatus::aborted)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("abo"), WorkflowModel::NodeStatus::aborted)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("SHUTDOWN"), WorkflowModel::NodeStatus::shutdown)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("HALTED"), WorkflowModel::NodeStatus::halted)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("hal"), WorkflowModel::NodeStatus::halted)
-    EXPECT_EQ(WorkflowModel::getNodeStatus("RUNNING"), WorkflowModel::NodeStatus::running)
+    struct TestCase{
+        std::string s;
+        NodeStatus status;
+    };
+
+    std::vector<TestCase> tests{
+        {"unknown", NodeStatus::unknown},
+        {"unk", NodeStatus::unknown},
+        {"suspended", NodeStatus::suspended},
+        {"sus", NodeStatus::suspended},
+        {"complete", NodeStatus::complete},
+        {"com", NodeStatus::complete},
+        {"queued", NodeStatus::queued},
+        {"que", NodeStatus::queued},
+        {"submitted", NodeStatus::submitted},
+        {"sub", NodeStatus::submitted},
+        {"active", NodeStatus::active},
+        {"act", NodeStatus::active},
+        {"aborted", NodeStatus::aborted},
+        {"abo", NodeStatus::aborted},
+        {"SHUTDOWN", NodeStatus::shutedown},
+        {"HALTED", NodeStatus::halted},
+        {"hal", NodeStatus::halted},
+        {"RUNNING", NodeStatus::running},
+    };
+
+    for(auto test: tests){
+        EXPECT_EQ(getNodeStatus(test.s), test.status);
+    }
 }
 
 TEST_F(NodeStatusTest, MethodNodeStatusToString){
-    EXPECT_EQ(WorkflowModel::nodeStatusToString(WorkflowModel::NodeStatus::unknown), "unknown");
-    EXPECT_EQ(WorkflowModel::nodeStatusToString(WorkflowModel::NodeStatus::suspended), "suspended");
-    EXPECT_EQ(WorkflowModel::nodeStatusToString(WorkflowModel::NodeStatus::complete), "complete");
-    EXPECT_EQ(WorkflowModel::nodeStatusToString(WorkflowModel::NodeStatus::queued), "queued");
-    EXPECT_EQ(WorkflowModel::nodeStatusToString(WorkflowModel::NodeStatus::submitted), "submitted");
-    EXPECT_EQ(WorkflowModel::nodeStatusToString(WorkflowModel::NodeStatus::active), "active");
-    EXPECT_EQ(WorkflowModel::nodeStatusToString(WorkflowModel::NodeStatus::aborted), "aborted");
-    EXPECT_EQ(WorkflowModel::nodeStatusToString(WorkflowModel::NodeStatus::shutdown), "shutdown");
-    EXPECT_EQ(WorkflowModel::nodeStatusToString(WorkflowModel::NodeStatus::halted), "halted");
-    EXPECT_EQ(WorkflowModel::nodeStatusToString(WorkflowModel::NodeStatus::running), "running");
+    struct TestCase{
+        NodeStatus status;
+        std::string result;
+    };
+
+    std::vector<TestCase> tests{
+        { NodeStatus::unknown, "unknown" },
+        { NodeStatus::suspended, "suspended" },
+        { NodeStatus::complete, "complete" },
+        { NodeStatus::queued, "queued" },
+        { NodeStatus::submitted, "submitted" },
+        { NodeStatus::active, "active" },
+        { NodeStatus::aborted, "aborted" },
+        { NodeStatus::shutdown, "shutdown" },
+        { NodeStatus::halted, "halted" },
+        { NodeStatus::running, "running" },
+    };
+
+    for(auto test: tests){
+        EXPECT_EQ(nodeStatusToString(test.status), result);
+    }
 }
 }
