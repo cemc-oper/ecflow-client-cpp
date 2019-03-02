@@ -10,8 +10,10 @@ add_library(workflow_model STATIC ${SOURCE_FILES})
 target_include_directories(workflow_model
     PUBLIC
     ${PROJECT_SOURCE_DIR}/src
+    ${ecflow_client_cpp_SOURCE_DIR}/vendor
     INTERFACE
     ${PROJECT_SOURCE_DIR}/src
+    ${ecflow_client_cpp_SOURCE_DIR}/vendor
     )
 
 

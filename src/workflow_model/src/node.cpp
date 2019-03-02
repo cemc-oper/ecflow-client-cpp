@@ -1,5 +1,6 @@
 #include "node.h"
 
+
 #include <sstream>
 #include <iterator>
 
@@ -34,6 +35,26 @@ std::string Node::nodePath() const {
         node_path = "/";
     }
     return node_path;
+}
+
+nlohmann::json Node::toJson() const {
+    using json = nlohmann::json;
+    json node_json;
+    node_json["name"] = name_;
+    node_json["status"] = status_;
+
+    std::vector<json> children_json_array;
+    for(auto child: children_){
+        auto child_json = child.toJson();
+        children_json_array.push_back(child_json);
+    }
+    node_json["children"] = children_json_array;
+
+    return node_json;
+}
+
+std::string Node::toJsonString() const {
+    return toJson().dump();
 }
 
 }

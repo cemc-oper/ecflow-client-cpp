@@ -76,4 +76,31 @@ TEST_F(NodeTest, MethodNodePath){
     EXPECT_EQ(root.nodePath(), "/");
 }
 
+TEST_F(NodeTest, MethodToJson){
+    WorkflowModel::Node t1{"t1"};
+    WorkflowModel::Node t2{"t2"};
+    WorkflowModel::Node f1{"f1"};
+    f1.addChild(t1);
+    f1.addChild(t2);
+
+    auto root_json = f1.toJson();
+    auto expected_json = nlohmann::json{
+        {"name", "f1"},
+        {"status", 0},
+        {"children",
+            {
+                {
+                    {"name", "t1"}, {"status", 0}, {"children", {}}
+                },
+                {
+                    {"name", "t2"}, {"status", 0}, {"children", {}}
+                },
+            }
+        }
+    };
+    EXPECT_EQ(root_json["name"], expected_json["name"]);
+    EXPECT_EQ(root_json["status"], expected_json["status"]);
+    EXPECT_EQ(root_json["children"][0]["name"], expected_json["children"][0]["name"]);
+}
+
 }

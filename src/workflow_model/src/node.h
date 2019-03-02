@@ -1,8 +1,10 @@
 #pragma once
 
+#include "node_status.h"
+
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include "node_status.h"
 
 namespace WorkflowModel {
 
@@ -42,6 +44,9 @@ public:
     }
 
     std::string nodePath() const;
+
+    nlohmann::json toJson() const;
+    std::string toJsonString() const;
 
 private:
     std::string name_;
