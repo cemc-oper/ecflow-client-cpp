@@ -1,5 +1,6 @@
 #include "node.h"
 
+#include <boost/algorithm/string.hpp>
 
 #include <sstream>
 #include <iterator>

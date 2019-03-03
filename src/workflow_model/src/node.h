@@ -16,7 +16,7 @@ public:
 
     virtual ~Node(){}
 
-    void setParent(std::shared_ptr<Node> &&parent){
+    void setParent(std::shared_ptr<Node> parent){
         parent_ = parent;
     }
 
@@ -53,7 +53,7 @@ public:
     std::string toJsonString() const;
 
 private:
-    std::string name_;
+    std::string name_ = "";
     std::shared_ptr<Node> parent_;
     std::vector<std::shared_ptr<Node>> children_;
     NodeStatus status_ = NodeStatus::unknown;

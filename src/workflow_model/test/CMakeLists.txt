@@ -1,7 +1,7 @@
 set(TEST_MAIN_SRCS
     test_node.cpp
     test_main.cpp
-    )
+    test_bunch.cpp)
 
 add_executable(test_workflow_model_main ${TEST_MAIN_SRCS})
 
