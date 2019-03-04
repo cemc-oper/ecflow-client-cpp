@@ -1,1 +1,2 @@
 add_subdirectory(workflow_model)
+add_subdirectory(ecflow_util)
