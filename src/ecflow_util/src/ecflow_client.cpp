@@ -9,7 +9,8 @@ using namespace WorkflowModel;
 
 class EcflowClientPrivate{
 public:
-    EcflowClientPrivate(const std::string &host, const std::string &port){}
+    EcflowClientPrivate(const std::string &host, const std::string &port):
+		host_{ host }, port_{ port } {}
 
     std::vector<NodeStatusRecord> collectStatus(){
         invoker_.set_host_port(host_, port_);

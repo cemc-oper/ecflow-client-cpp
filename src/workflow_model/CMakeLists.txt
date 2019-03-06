@@ -6,6 +6,7 @@ set(SOURCE_FILES
     src/node_status.cpp
     src/node.cpp
     src/bunch.cpp
+    src/node_variable.cpp
     )
 
 add_library(workflow_model STATIC
