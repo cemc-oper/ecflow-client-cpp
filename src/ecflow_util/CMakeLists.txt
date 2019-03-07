@@ -1,7 +1,7 @@
 project(ecflow_util)
 
-set(ECFLOW_BUILD_DIR /g3/wangdp/app/nwpc/ecmwf/ecflow/4.12/build-server)
-set(ECFLOW_SOURCE_DIR /g3/wangdp/app/nwpc/ecmwf/ecflow/4.12/ecFlow-4.12.0-Source)
+set(ECFLOW_BUILD_DIR /home/wangdp/app/ecmwf/ecflow/build)
+set(ECFLOW_SOURCE_DIR /home/wangdp/app/ecmwf/ecflow/ecFlow-4.9.0-Source)
 
 find_package(Boost
     REQUIRED
@@ -51,3 +51,5 @@ target_link_libraries(ecflow_util
         Boost::thread
         Boost::regex
     )
+
+add_library(EclfowClient::ecflow_util ALIAS ecflow_util)

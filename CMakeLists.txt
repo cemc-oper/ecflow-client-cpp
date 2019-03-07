@@ -11,5 +11,5 @@ if(ENABLE_TESTS)
     enable_testing()
 endif()
 
-add_subdirectory(example)
 add_subdirectory(src)
+add_subdirectory(example)

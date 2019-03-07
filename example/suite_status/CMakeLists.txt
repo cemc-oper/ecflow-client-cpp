@@ -6,5 +6,5 @@ add_executable(example_suite_status
 
 target_link_libraries(example_suite_status
     PUBLIC
-        ecflow_util
+        EclfowClient::ecflow_util
     )
