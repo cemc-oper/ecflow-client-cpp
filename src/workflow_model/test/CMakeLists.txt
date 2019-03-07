@@ -2,16 +2,18 @@ set(TEST_MAIN_SRCS
     test_node.cpp
     test_main.cpp
     test_bunch.cpp
-	test_node_variable.cpp)
+	test_node_variable.cpp
+	test_workflow_node.cpp)
 
-add_executable(test_workflow_model_main ${TEST_MAIN_SRCS})
+add_executable(test_workflow_model_main
+	${TEST_MAIN_SRCS})
 
 target_include_directories(test_workflow_model_main PRIVATE
     ${GTEST_INCLUDE_DIRS}
     ${PROJECT_BINARY_DIR}/test
     )
 
-target_link_libraries(test_workflow_model_main
+target_link_libraries(test_workflow_model_main PRIVATE
     workflow_model
     ${GTEST_BOTH_LIBRARIES}
     pthread)
