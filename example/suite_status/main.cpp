@@ -12,5 +12,8 @@ int main(int argc, char* argv[]) {
             <<std::endl;
     }
 
+    auto node = client.getWorkflowNode("/meso_post/00/initial");
+    std::cout<<node->toJson().dump(2)<<std::endl;
+
     return 0;
 }

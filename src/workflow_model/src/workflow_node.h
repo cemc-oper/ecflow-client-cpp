@@ -47,8 +47,8 @@ public:
 
 private:
 	std::string name_;
-	NodeStatus status_;
-	NodeType node_type_;
+	NodeStatus status_ = NodeStatus::unknown;
+	NodeType node_type_ = NodeType::Unknown;
 
 	VariableList variable_list_;
 	std::vector<VariableList> inherited_variable_list_;

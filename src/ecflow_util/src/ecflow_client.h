@@ -1,6 +1,7 @@
 #pragma once
 
 #include <bunch.h>
+#include <workflow_node.h>
 
 namespace EcflowUtil{
 
@@ -17,6 +18,8 @@ public:
     std::shared_ptr<WorkflowModel::Bunch> bunch(){
         return bunch_;
     }
+
+    std::shared_ptr<WorkflowModel::WorkflowNode> getWorkflowNode(const std::string &node_path);
 
 private:
     void collectBunch();
