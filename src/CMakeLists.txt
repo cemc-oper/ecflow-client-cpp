@@ -1,2 +1,3 @@
 add_subdirectory(workflow_model)
 add_subdirectory(ecflow_util)
+add_subdirectory(ecflow_client_grpc)

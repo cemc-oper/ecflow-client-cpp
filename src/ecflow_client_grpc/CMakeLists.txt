@@ -1,0 +1,3 @@
+project(ecflow_client_grpc)
+
+add_subdirectory(ecflow_grpc_server)
