@@ -1,1 +1,2 @@
 add_subdirectory(suite_status)
+add_subdirectory(ecflow_grpc_client)
