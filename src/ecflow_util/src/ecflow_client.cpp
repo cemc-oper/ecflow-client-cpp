@@ -91,6 +91,7 @@ private:
     std::string port_;
     ClientInvoker invoker_;
     defs_ptr defs_;
+
     friend class EcflowClient;
 };
 
@@ -110,15 +111,14 @@ void EcflowClient::sync() {
     collectBunch();
 }
 
-std::vector<WorkflowModel::NodeStatusRecord> EcflowClient::collectStatus() {
-    auto records = p_->collectStatus();
-    return records;
+void EcflowClient::collectStatus() {
+    status_records_ = p_->collectStatus();
 }
 
 void EcflowClient::collectBunch() {
-    auto records = collectStatus();
+    collectStatus();
     bunch_ = std::make_shared<WorkflowModel::Bunch>();
-    for(auto &record: records){
+    for(auto &record: status_records_){
         bunch_->addNodeStatus(record);
     }
 }
@@ -127,5 +127,7 @@ std::shared_ptr<WorkflowModel::WorkflowNode> EcflowClient::getWorkflowNode(const
 
     return p_->getWorkflowNode(node_path);
 }
+
+
 
 } // namespace EcflowUtil

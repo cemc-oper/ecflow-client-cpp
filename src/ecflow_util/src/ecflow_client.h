@@ -19,17 +19,22 @@ public:
         return bunch_;
     }
 
+    std::vector<WorkflowModel::NodeStatusRecord> statusRecords(){
+        return status_records_;
+    }
+
     std::shared_ptr<WorkflowModel::WorkflowNode> getWorkflowNode(const std::string &node_path);
 
 private:
     void collectBunch();
-    std::vector<WorkflowModel::NodeStatusRecord> collectStatus();
+    void collectStatus();
 
     EcflowClientPrivate* p_;
 
     std::string host_;
     std::string port_;
 
+    std::vector<WorkflowModel::NodeStatusRecord> status_records_;
     std::shared_ptr<WorkflowModel::Bunch> bunch_;
 };
 
