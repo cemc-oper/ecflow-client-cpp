@@ -2,6 +2,9 @@
 
 #include <ecflow_client.h>
 
+#include <boost/log/trivial.hpp>
+#include <boost/format.hpp>
+
 EcflowClientServiceImpl::EcflowClientServiceImpl() {
 
 }
@@ -10,6 +13,8 @@ EcflowClientServiceImpl::EcflowClientServiceImpl() {
     ::grpc::ServerContext *context,
     const ::ecflow_client::StatusRequest *request,
     ::ecflow_client::StatusRecordsResponse *response) {
+
+    BOOST_LOG_TRIVIAL(info) << boost::format{"[%s/%s] receive request..."} % request->owner() % request->repo();
 
     response->set_owner(request->owner());
     response->set_repo(request->repo());
