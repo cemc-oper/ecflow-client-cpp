@@ -1,12 +1,15 @@
 #pragma once
 
 #include "node.h"
+#include <nlohmann/json.hpp>
 
 namespace WorkflowModel {
 
 struct NodeStatusRecord{
     std::string path_;
     std::string status_;
+
+    nlohmann::json toJson() const;
 };
 
 class Bunch: public Node {

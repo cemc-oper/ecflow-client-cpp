@@ -4,6 +4,16 @@
 
 namespace WorkflowModel{
 
+using json = nlohmann::json;
+
+json NodeStatusRecord::toJson() const {
+    json j{
+        {"path", path_},
+        {"status", status_}
+    };
+    return j;
+}
+
 Bunch::Bunch():
     Node{}{
 

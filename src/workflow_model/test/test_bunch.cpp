@@ -13,7 +13,14 @@ protected:
 
 using namespace ::WorkflowModel;
 
-TEST_F(BunchTest, MethodConstructor){
+TEST_F(BunchTest, NodeStatusRecord_ToJson_Test){
+    NodeStatusRecord record{"/meso_post/00/initial", "queued"};
+    auto j = record.toJson();
+    EXPECT_EQ(j["path"], "/meso_post/00/initial");
+    EXPECT_EQ(j["status"], "queued");
+}
+
+TEST_F(BunchTest, BunchTest_ToJson_Test){
     auto bunch = std::make_shared<Bunch>("nwpc_op", NodeStatus::queued);
 
     EXPECT_EQ(bunch->name(), "nwpc_op");
@@ -24,7 +31,7 @@ TEST_F(BunchTest, MethodConstructor){
     EXPECT_EQ(empty_bunch->status(), NodeStatus::unknown);
 }
 
-TEST_F(BunchTest, MethodFindNode){
+TEST_F(BunchTest, BunchTest_FindNode_Test){
     auto bunch = std::make_shared<Bunch>("nwpc_op", NodeStatus::queued);
     auto suite = std::make_shared<Node>("suite1", NodeStatus::queued);
     bunch->addChild(suite);
