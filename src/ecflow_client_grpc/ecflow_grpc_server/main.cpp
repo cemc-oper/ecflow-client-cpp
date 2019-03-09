@@ -7,6 +7,7 @@ void RunServer() {
     EcflowClientServiceImpl service;
     grpc::ServerBuilder builder;
 
+    builder.SetDefaultCompressionAlgorithm(GRPC_COMPRESS_GZIP);
     builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
     builder.RegisterService(&service);
     std::unique_ptr<grpc::Server> server(builder.BuildAndStart());
