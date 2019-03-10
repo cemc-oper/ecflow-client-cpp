@@ -13,7 +13,7 @@ public:
     EcflowClient(const std::string &host, const std::string &port);
     ~EcflowClient();
 
-    void sync();
+    int sync();
 
     std::shared_ptr<WorkflowModel::Bunch> bunch(){
         return bunch_;
@@ -25,10 +25,9 @@ public:
 
     std::shared_ptr<WorkflowModel::WorkflowNode> getWorkflowNode(const std::string &node_path);
 
-private:
-    void collectBunch();
-    void collectStatus();
+    std::string errorMessage();
 
+private:
     EcflowClientPrivate* p_;
 
     std::string host_;

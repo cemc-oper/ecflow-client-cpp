@@ -18,9 +18,17 @@ EcflowClientServiceImpl::EcflowClientServiceImpl() {
     response->set_owner(request->owner());
     response->set_repo(request->repo());
 
+    spdlog::info("[{0}/{1}] getting status from server...", request->owner(), request->repo());
     EcflowUtil::EcflowClient client{request->host(), request->port()};
-    client.sync();
+    auto ret = client.sync();
+    if(ret != 0){
+        response->mutable_response_status()->set_has_error(true);
+        response->mutable_response_status()->set_error_string(client.errorMessage());
+        return grpc::Status::OK;
+    }
+
     auto records = client.statusRecords();
+    spdlog::info("[{0}/{1}] getting status from server...done", request->owner(), request->repo());
 
     auto status_map = response->mutable_status_map();
 
@@ -28,6 +36,7 @@ EcflowClientServiceImpl::EcflowClientServiceImpl() {
         (*status_map)[record.path_] = record.status_;
     }
 
+    spdlog::info("[{0}/{1}] CollectStatusRecords...done", request->owner(), request->repo());
     return grpc::Status::OK;
 }
 
@@ -41,7 +50,14 @@ EcflowClientServiceImpl::CollectStatus(
     response->set_repo(request->repo());
 
     EcflowUtil::EcflowClient client{request->host(), request->port()};
-    client.sync();
+
+    auto ret = client.sync();
+    if(ret != 0){
+        response->mutable_response_status()->set_has_error(true);
+        response->mutable_response_status()->set_error_string(client.errorMessage());
+        return grpc::Status::OK;
+    }
+
     auto bunch = client.bunch();
 
     response->set_status(bunch->toJsonString());

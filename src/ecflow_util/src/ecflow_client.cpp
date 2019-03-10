@@ -8,14 +8,20 @@ namespace EcflowUtil{
 
 class EcflowClientPrivate{
 public:
-    EcflowClientPrivate(const std::string &host, const std::string &port):
+    EcflowClientPrivate(std::string host, std::string port):
 		host_{ host }, port_{ port } {}
 
-    std::vector<WorkflowModel::NodeStatusRecord> collectStatus(){
+	int sync() {
         invoker_.set_host_port(host_, port_);
         auto sync_result = invoker_.sync_local();
+        if(sync_result!=0){
+            error_message_ = invoker_.errorMsg();
+        }
+        return sync_result;
+    }
 
-        defs_ = invoker_.defs();
+    std::vector<WorkflowModel::NodeStatusRecord> collectStatus(){
+         defs_ = invoker_.defs();
 
         std::vector<node_ptr> nodes;
         defs_->get_all_nodes(nodes);
@@ -92,6 +98,8 @@ private:
     ClientInvoker invoker_;
     defs_ptr defs_;
 
+    std::string error_message_;
+
     friend class EcflowClient;
 };
 
@@ -107,27 +115,26 @@ EcflowClient::~EcflowClient() {
     delete p_;
 }
 
-void EcflowClient::sync() {
-    collectBunch();
-}
-
-void EcflowClient::collectStatus() {
+int EcflowClient::sync() {
+    auto ret = p_->sync();
+    if(ret != 0){
+        return ret;
+    }
     status_records_ = p_->collectStatus();
-}
-
-void EcflowClient::collectBunch() {
-    collectStatus();
     bunch_ = std::make_shared<WorkflowModel::Bunch>();
     for(auto &record: status_records_){
         bunch_->addNodeStatus(record);
     }
+    return 0;
 }
 
 std::shared_ptr<WorkflowModel::WorkflowNode> EcflowClient::getWorkflowNode(const std::string &node_path) {
-
     return p_->getWorkflowNode(node_path);
 }
 
+std::string EcflowClient::errorMessage() {
+    return p_->error_message_;
+}
 
 
 } // namespace EcflowUtil

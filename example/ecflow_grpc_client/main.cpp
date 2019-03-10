@@ -1,5 +1,6 @@
 #include <ecflow_client.grpc.pb.h>
 #include <CLIUtils/CLI11.hpp>
+#include <spdlog/spdlog.h>
 
 #include <grpcpp/grpcpp.h>
 #include <iostream>
@@ -38,12 +39,19 @@ int main(int argc, char** argv){
     ecflow_client::StatusRecordsResponse response;
     grpc::ClientContext context;
     context.set_compression_algorithm(GRPC_COMPRESS_DEFLATE);
+
+    spdlog::info("[{0}/{1}] get records...", owner, repo);
     grpc::Status status = stub_->CollectStatusRecords(&context, request, &response);
+    spdlog::info("[{0}/{1}] get records...done", owner, repo);
 
     if(status.ok()){
-        const auto &status_map = response.status_map();
-        for(auto &s : status_map){
-            std::cout<<s.first<<": "<<s.second<<std::endl;
+        if(response.response_status().has_error()){
+            spdlog::warn("[{0}/{1}] get records...failed: {2}", owner, repo, response.response_status().error_string());
+        } else {
+//            const auto &status_map = response.status_map();
+//            for(auto &s : status_map){
+//                std::cout<<s.first<<": "<<s.second<<std::endl;
+//            }
         }
     } else {
         std::cout<<status.error_code()<<": "<<status.error_message()<<std::endl;
