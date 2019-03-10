@@ -41,7 +41,7 @@ namespace protobuf_ecflow_5fclient_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[4];
+  static const ::google::protobuf::internal::ParseTable schema[7];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -49,6 +49,15 @@ struct TableStruct {
 void AddDescriptors();
 }  // namespace protobuf_ecflow_5fclient_2eproto
 namespace ecflow_client {
+class NodeRequest;
+class NodeRequestDefaultTypeInternal;
+extern NodeRequestDefaultTypeInternal _NodeRequest_default_instance_;
+class NodeResponse;
+class NodeResponseDefaultTypeInternal;
+extern NodeResponseDefaultTypeInternal _NodeResponse_default_instance_;
+class ResponseStatus;
+class ResponseStatusDefaultTypeInternal;
+extern ResponseStatusDefaultTypeInternal _ResponseStatus_default_instance_;
 class StatusRecordsResponse;
 class StatusRecordsResponseDefaultTypeInternal;
 extern StatusRecordsResponseDefaultTypeInternal _StatusRecordsResponse_default_instance_;
@@ -64,6 +73,9 @@ extern StatusResponseDefaultTypeInternal _StatusResponse_default_instance_;
 }  // namespace ecflow_client
 namespace google {
 namespace protobuf {
+template<> ::ecflow_client::NodeRequest* Arena::CreateMaybeMessage<::ecflow_client::NodeRequest>(Arena*);
+template<> ::ecflow_client::NodeResponse* Arena::CreateMaybeMessage<::ecflow_client::NodeResponse>(Arena*);
+template<> ::ecflow_client::ResponseStatus* Arena::CreateMaybeMessage<::ecflow_client::ResponseStatus>(Arena*);
 template<> ::ecflow_client::StatusRecordsResponse* Arena::CreateMaybeMessage<::ecflow_client::StatusRecordsResponse>(Arena*);
 template<> ::ecflow_client::StatusRecordsResponse_StatusMapEntry_DoNotUse* Arena::CreateMaybeMessage<::ecflow_client::StatusRecordsResponse_StatusMapEntry_DoNotUse>(Arena*);
 template<> ::ecflow_client::StatusRequest* Arena::CreateMaybeMessage<::ecflow_client::StatusRequest>(Arena*);
@@ -73,6 +85,124 @@ template<> ::ecflow_client::StatusResponse* Arena::CreateMaybeMessage<::ecflow_c
 namespace ecflow_client {
 
 // ===================================================================
+
+class ResponseStatus : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ecflow_client.ResponseStatus) */ {
+ public:
+  ResponseStatus();
+  virtual ~ResponseStatus();
+
+  ResponseStatus(const ResponseStatus& from);
+
+  inline ResponseStatus& operator=(const ResponseStatus& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ResponseStatus(ResponseStatus&& from) noexcept
+    : ResponseStatus() {
+    *this = ::std::move(from);
+  }
+
+  inline ResponseStatus& operator=(ResponseStatus&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ResponseStatus& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ResponseStatus* internal_default_instance() {
+    return reinterpret_cast<const ResponseStatus*>(
+               &_ResponseStatus_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    0;
+
+  void Swap(ResponseStatus* other);
+  friend void swap(ResponseStatus& a, ResponseStatus& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ResponseStatus* New() const final {
+    return CreateMaybeMessage<ResponseStatus>(NULL);
+  }
+
+  ResponseStatus* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<ResponseStatus>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const ResponseStatus& from);
+  void MergeFrom(const ResponseStatus& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ResponseStatus* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string error_string = 2;
+  void clear_error_string();
+  static const int kErrorStringFieldNumber = 2;
+  const ::std::string& error_string() const;
+  void set_error_string(const ::std::string& value);
+  #if LANG_CXX11
+  void set_error_string(::std::string&& value);
+  #endif
+  void set_error_string(const char* value);
+  void set_error_string(const char* value, size_t size);
+  ::std::string* mutable_error_string();
+  ::std::string* release_error_string();
+  void set_allocated_error_string(::std::string* error_string);
+
+  // bool has_error = 1;
+  void clear_has_error();
+  static const int kHasErrorFieldNumber = 1;
+  bool has_error() const;
+  void set_has_error(bool value);
+
+  // @@protoc_insertion_point(class_scope:ecflow_client.ResponseStatus)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr error_string_;
+  bool has_error_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_ecflow_5fclient_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
 
 class StatusRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ecflow_client.StatusRequest) */ {
  public:
@@ -109,7 +239,7 @@ class StatusRequest : public ::google::protobuf::Message /* @@protoc_insertion_p
                &_StatusRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    0;
+    1;
 
   void Swap(StatusRequest* other);
   friend void swap(StatusRequest& a, StatusRequest& b) {
@@ -286,7 +416,7 @@ class StatusRecordsResponse : public ::google::protobuf::Message /* @@protoc_ins
                &_StatusRecordsResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   void Swap(StatusRecordsResponse* other);
   friend void swap(StatusRecordsResponse& a, StatusRecordsResponse& b) {
@@ -376,6 +506,18 @@ class StatusRecordsResponse : public ::google::protobuf::Message /* @@protoc_ins
   ::std::string* release_repo();
   void set_allocated_repo(::std::string* repo);
 
+  // .ecflow_client.ResponseStatus response_status = 5;
+  bool has_response_status() const;
+  void clear_response_status();
+  static const int kResponseStatusFieldNumber = 5;
+  private:
+  const ::ecflow_client::ResponseStatus& _internal_response_status() const;
+  public:
+  const ::ecflow_client::ResponseStatus& response_status() const;
+  ::ecflow_client::ResponseStatus* release_response_status();
+  ::ecflow_client::ResponseStatus* mutable_response_status();
+  void set_allocated_response_status(::ecflow_client::ResponseStatus* response_status);
+
   // int64 collected_timestamp = 3;
   void clear_collected_timestamp();
   static const int kCollectedTimestampFieldNumber = 3;
@@ -394,6 +536,7 @@ class StatusRecordsResponse : public ::google::protobuf::Message /* @@protoc_ins
       0 > status_map_;
   ::google::protobuf::internal::ArenaStringPtr owner_;
   ::google::protobuf::internal::ArenaStringPtr repo_;
+  ::ecflow_client::ResponseStatus* response_status_;
   ::google::protobuf::int64 collected_timestamp_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_ecflow_5fclient_2eproto::TableStruct;
@@ -435,7 +578,7 @@ class StatusResponse : public ::google::protobuf::Message /* @@protoc_insertion_
                &_StatusResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   void Swap(StatusResponse* other);
   friend void swap(StatusResponse& a, StatusResponse& b) {
@@ -529,6 +672,18 @@ class StatusResponse : public ::google::protobuf::Message /* @@protoc_insertion_
   ::std::string* release_status();
   void set_allocated_status(::std::string* status);
 
+  // .ecflow_client.ResponseStatus response_status = 5;
+  bool has_response_status() const;
+  void clear_response_status();
+  static const int kResponseStatusFieldNumber = 5;
+  private:
+  const ::ecflow_client::ResponseStatus& _internal_response_status() const;
+  public:
+  const ::ecflow_client::ResponseStatus& response_status() const;
+  ::ecflow_client::ResponseStatus* release_response_status();
+  ::ecflow_client::ResponseStatus* mutable_response_status();
+  void set_allocated_response_status(::ecflow_client::ResponseStatus* response_status);
+
   // int64 collected_timestamp = 3;
   void clear_collected_timestamp();
   static const int kCollectedTimestampFieldNumber = 3;
@@ -542,7 +697,348 @@ class StatusResponse : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::internal::ArenaStringPtr owner_;
   ::google::protobuf::internal::ArenaStringPtr repo_;
   ::google::protobuf::internal::ArenaStringPtr status_;
+  ::ecflow_client::ResponseStatus* response_status_;
   ::google::protobuf::int64 collected_timestamp_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_ecflow_5fclient_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class NodeRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ecflow_client.NodeRequest) */ {
+ public:
+  NodeRequest();
+  virtual ~NodeRequest();
+
+  NodeRequest(const NodeRequest& from);
+
+  inline NodeRequest& operator=(const NodeRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  NodeRequest(NodeRequest&& from) noexcept
+    : NodeRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline NodeRequest& operator=(NodeRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const NodeRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const NodeRequest* internal_default_instance() {
+    return reinterpret_cast<const NodeRequest*>(
+               &_NodeRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  void Swap(NodeRequest* other);
+  friend void swap(NodeRequest& a, NodeRequest& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline NodeRequest* New() const final {
+    return CreateMaybeMessage<NodeRequest>(NULL);
+  }
+
+  NodeRequest* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<NodeRequest>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const NodeRequest& from);
+  void MergeFrom(const NodeRequest& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(NodeRequest* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string owner = 1;
+  void clear_owner();
+  static const int kOwnerFieldNumber = 1;
+  const ::std::string& owner() const;
+  void set_owner(const ::std::string& value);
+  #if LANG_CXX11
+  void set_owner(::std::string&& value);
+  #endif
+  void set_owner(const char* value);
+  void set_owner(const char* value, size_t size);
+  ::std::string* mutable_owner();
+  ::std::string* release_owner();
+  void set_allocated_owner(::std::string* owner);
+
+  // string repo = 2;
+  void clear_repo();
+  static const int kRepoFieldNumber = 2;
+  const ::std::string& repo() const;
+  void set_repo(const ::std::string& value);
+  #if LANG_CXX11
+  void set_repo(::std::string&& value);
+  #endif
+  void set_repo(const char* value);
+  void set_repo(const char* value, size_t size);
+  ::std::string* mutable_repo();
+  ::std::string* release_repo();
+  void set_allocated_repo(::std::string* repo);
+
+  // string host = 3;
+  void clear_host();
+  static const int kHostFieldNumber = 3;
+  const ::std::string& host() const;
+  void set_host(const ::std::string& value);
+  #if LANG_CXX11
+  void set_host(::std::string&& value);
+  #endif
+  void set_host(const char* value);
+  void set_host(const char* value, size_t size);
+  ::std::string* mutable_host();
+  ::std::string* release_host();
+  void set_allocated_host(::std::string* host);
+
+  // string port = 4;
+  void clear_port();
+  static const int kPortFieldNumber = 4;
+  const ::std::string& port() const;
+  void set_port(const ::std::string& value);
+  #if LANG_CXX11
+  void set_port(::std::string&& value);
+  #endif
+  void set_port(const char* value);
+  void set_port(const char* value, size_t size);
+  ::std::string* mutable_port();
+  ::std::string* release_port();
+  void set_allocated_port(::std::string* port);
+
+  // string path = 5;
+  void clear_path();
+  static const int kPathFieldNumber = 5;
+  const ::std::string& path() const;
+  void set_path(const ::std::string& value);
+  #if LANG_CXX11
+  void set_path(::std::string&& value);
+  #endif
+  void set_path(const char* value);
+  void set_path(const char* value, size_t size);
+  ::std::string* mutable_path();
+  ::std::string* release_path();
+  void set_allocated_path(::std::string* path);
+
+  // @@protoc_insertion_point(class_scope:ecflow_client.NodeRequest)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr owner_;
+  ::google::protobuf::internal::ArenaStringPtr repo_;
+  ::google::protobuf::internal::ArenaStringPtr host_;
+  ::google::protobuf::internal::ArenaStringPtr port_;
+  ::google::protobuf::internal::ArenaStringPtr path_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_ecflow_5fclient_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class NodeResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ecflow_client.NodeResponse) */ {
+ public:
+  NodeResponse();
+  virtual ~NodeResponse();
+
+  NodeResponse(const NodeResponse& from);
+
+  inline NodeResponse& operator=(const NodeResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  NodeResponse(NodeResponse&& from) noexcept
+    : NodeResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline NodeResponse& operator=(NodeResponse&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const NodeResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const NodeResponse* internal_default_instance() {
+    return reinterpret_cast<const NodeResponse*>(
+               &_NodeResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    6;
+
+  void Swap(NodeResponse* other);
+  friend void swap(NodeResponse& a, NodeResponse& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline NodeResponse* New() const final {
+    return CreateMaybeMessage<NodeResponse>(NULL);
+  }
+
+  NodeResponse* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<NodeResponse>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const NodeResponse& from);
+  void MergeFrom(const NodeResponse& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(NodeResponse* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string owner = 1;
+  void clear_owner();
+  static const int kOwnerFieldNumber = 1;
+  const ::std::string& owner() const;
+  void set_owner(const ::std::string& value);
+  #if LANG_CXX11
+  void set_owner(::std::string&& value);
+  #endif
+  void set_owner(const char* value);
+  void set_owner(const char* value, size_t size);
+  ::std::string* mutable_owner();
+  ::std::string* release_owner();
+  void set_allocated_owner(::std::string* owner);
+
+  // string repo = 2;
+  void clear_repo();
+  static const int kRepoFieldNumber = 2;
+  const ::std::string& repo() const;
+  void set_repo(const ::std::string& value);
+  #if LANG_CXX11
+  void set_repo(::std::string&& value);
+  #endif
+  void set_repo(const char* value);
+  void set_repo(const char* value, size_t size);
+  ::std::string* mutable_repo();
+  ::std::string* release_repo();
+  void set_allocated_repo(::std::string* repo);
+
+  // string path = 3;
+  void clear_path();
+  static const int kPathFieldNumber = 3;
+  const ::std::string& path() const;
+  void set_path(const ::std::string& value);
+  #if LANG_CXX11
+  void set_path(::std::string&& value);
+  #endif
+  void set_path(const char* value);
+  void set_path(const char* value, size_t size);
+  ::std::string* mutable_path();
+  ::std::string* release_path();
+  void set_allocated_path(::std::string* path);
+
+  // string node = 4;
+  void clear_node();
+  static const int kNodeFieldNumber = 4;
+  const ::std::string& node() const;
+  void set_node(const ::std::string& value);
+  #if LANG_CXX11
+  void set_node(::std::string&& value);
+  #endif
+  void set_node(const char* value);
+  void set_node(const char* value, size_t size);
+  ::std::string* mutable_node();
+  ::std::string* release_node();
+  void set_allocated_node(::std::string* node);
+
+  // .ecflow_client.ResponseStatus response_status = 5;
+  bool has_response_status() const;
+  void clear_response_status();
+  static const int kResponseStatusFieldNumber = 5;
+  private:
+  const ::ecflow_client::ResponseStatus& _internal_response_status() const;
+  public:
+  const ::ecflow_client::ResponseStatus& response_status() const;
+  ::ecflow_client::ResponseStatus* release_response_status();
+  ::ecflow_client::ResponseStatus* mutable_response_status();
+  void set_allocated_response_status(::ecflow_client::ResponseStatus* response_status);
+
+  // @@protoc_insertion_point(class_scope:ecflow_client.NodeResponse)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr owner_;
+  ::google::protobuf::internal::ArenaStringPtr repo_;
+  ::google::protobuf::internal::ArenaStringPtr path_;
+  ::google::protobuf::internal::ArenaStringPtr node_;
+  ::ecflow_client::ResponseStatus* response_status_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_ecflow_5fclient_2eproto::TableStruct;
 };
@@ -555,6 +1051,77 @@ class StatusResponse : public ::google::protobuf::Message /* @@protoc_insertion_
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// ResponseStatus
+
+// bool has_error = 1;
+inline void ResponseStatus::clear_has_error() {
+  has_error_ = false;
+}
+inline bool ResponseStatus::has_error() const {
+  // @@protoc_insertion_point(field_get:ecflow_client.ResponseStatus.has_error)
+  return has_error_;
+}
+inline void ResponseStatus::set_has_error(bool value) {
+  
+  has_error_ = value;
+  // @@protoc_insertion_point(field_set:ecflow_client.ResponseStatus.has_error)
+}
+
+// string error_string = 2;
+inline void ResponseStatus::clear_error_string() {
+  error_string_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ResponseStatus::error_string() const {
+  // @@protoc_insertion_point(field_get:ecflow_client.ResponseStatus.error_string)
+  return error_string_.GetNoArena();
+}
+inline void ResponseStatus::set_error_string(const ::std::string& value) {
+  
+  error_string_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:ecflow_client.ResponseStatus.error_string)
+}
+#if LANG_CXX11
+inline void ResponseStatus::set_error_string(::std::string&& value) {
+  
+  error_string_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ecflow_client.ResponseStatus.error_string)
+}
+#endif
+inline void ResponseStatus::set_error_string(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  error_string_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ecflow_client.ResponseStatus.error_string)
+}
+inline void ResponseStatus::set_error_string(const char* value, size_t size) {
+  
+  error_string_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ecflow_client.ResponseStatus.error_string)
+}
+inline ::std::string* ResponseStatus::mutable_error_string() {
+  
+  // @@protoc_insertion_point(field_mutable:ecflow_client.ResponseStatus.error_string)
+  return error_string_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ResponseStatus::release_error_string() {
+  // @@protoc_insertion_point(field_release:ecflow_client.ResponseStatus.error_string)
+  
+  return error_string_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ResponseStatus::set_allocated_error_string(::std::string* error_string) {
+  if (error_string != NULL) {
+    
+  } else {
+    
+  }
+  error_string_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), error_string);
+  // @@protoc_insertion_point(field_set_allocated:ecflow_client.ResponseStatus.error_string)
+}
+
+// -------------------------------------------------------------------
+
 // StatusRequest
 
 // string owner = 1;
@@ -913,6 +1480,60 @@ StatusRecordsResponse::mutable_status_map() {
   return status_map_.MutableMap();
 }
 
+// .ecflow_client.ResponseStatus response_status = 5;
+inline bool StatusRecordsResponse::has_response_status() const {
+  return this != internal_default_instance() && response_status_ != NULL;
+}
+inline void StatusRecordsResponse::clear_response_status() {
+  if (GetArenaNoVirtual() == NULL && response_status_ != NULL) {
+    delete response_status_;
+  }
+  response_status_ = NULL;
+}
+inline const ::ecflow_client::ResponseStatus& StatusRecordsResponse::_internal_response_status() const {
+  return *response_status_;
+}
+inline const ::ecflow_client::ResponseStatus& StatusRecordsResponse::response_status() const {
+  const ::ecflow_client::ResponseStatus* p = response_status_;
+  // @@protoc_insertion_point(field_get:ecflow_client.StatusRecordsResponse.response_status)
+  return p != NULL ? *p : *reinterpret_cast<const ::ecflow_client::ResponseStatus*>(
+      &::ecflow_client::_ResponseStatus_default_instance_);
+}
+inline ::ecflow_client::ResponseStatus* StatusRecordsResponse::release_response_status() {
+  // @@protoc_insertion_point(field_release:ecflow_client.StatusRecordsResponse.response_status)
+  
+  ::ecflow_client::ResponseStatus* temp = response_status_;
+  response_status_ = NULL;
+  return temp;
+}
+inline ::ecflow_client::ResponseStatus* StatusRecordsResponse::mutable_response_status() {
+  
+  if (response_status_ == NULL) {
+    auto* p = CreateMaybeMessage<::ecflow_client::ResponseStatus>(GetArenaNoVirtual());
+    response_status_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:ecflow_client.StatusRecordsResponse.response_status)
+  return response_status_;
+}
+inline void StatusRecordsResponse::set_allocated_response_status(::ecflow_client::ResponseStatus* response_status) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete response_status_;
+  }
+  if (response_status) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      response_status = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, response_status, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  response_status_ = response_status;
+  // @@protoc_insertion_point(field_set_allocated:ecflow_client.StatusRecordsResponse.response_status)
+}
+
 // -------------------------------------------------------------------
 
 // StatusResponse
@@ -1090,9 +1711,608 @@ inline void StatusResponse::set_allocated_status(::std::string* status) {
   // @@protoc_insertion_point(field_set_allocated:ecflow_client.StatusResponse.status)
 }
 
+// .ecflow_client.ResponseStatus response_status = 5;
+inline bool StatusResponse::has_response_status() const {
+  return this != internal_default_instance() && response_status_ != NULL;
+}
+inline void StatusResponse::clear_response_status() {
+  if (GetArenaNoVirtual() == NULL && response_status_ != NULL) {
+    delete response_status_;
+  }
+  response_status_ = NULL;
+}
+inline const ::ecflow_client::ResponseStatus& StatusResponse::_internal_response_status() const {
+  return *response_status_;
+}
+inline const ::ecflow_client::ResponseStatus& StatusResponse::response_status() const {
+  const ::ecflow_client::ResponseStatus* p = response_status_;
+  // @@protoc_insertion_point(field_get:ecflow_client.StatusResponse.response_status)
+  return p != NULL ? *p : *reinterpret_cast<const ::ecflow_client::ResponseStatus*>(
+      &::ecflow_client::_ResponseStatus_default_instance_);
+}
+inline ::ecflow_client::ResponseStatus* StatusResponse::release_response_status() {
+  // @@protoc_insertion_point(field_release:ecflow_client.StatusResponse.response_status)
+  
+  ::ecflow_client::ResponseStatus* temp = response_status_;
+  response_status_ = NULL;
+  return temp;
+}
+inline ::ecflow_client::ResponseStatus* StatusResponse::mutable_response_status() {
+  
+  if (response_status_ == NULL) {
+    auto* p = CreateMaybeMessage<::ecflow_client::ResponseStatus>(GetArenaNoVirtual());
+    response_status_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:ecflow_client.StatusResponse.response_status)
+  return response_status_;
+}
+inline void StatusResponse::set_allocated_response_status(::ecflow_client::ResponseStatus* response_status) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete response_status_;
+  }
+  if (response_status) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      response_status = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, response_status, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  response_status_ = response_status;
+  // @@protoc_insertion_point(field_set_allocated:ecflow_client.StatusResponse.response_status)
+}
+
+// -------------------------------------------------------------------
+
+// NodeRequest
+
+// string owner = 1;
+inline void NodeRequest::clear_owner() {
+  owner_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& NodeRequest::owner() const {
+  // @@protoc_insertion_point(field_get:ecflow_client.NodeRequest.owner)
+  return owner_.GetNoArena();
+}
+inline void NodeRequest::set_owner(const ::std::string& value) {
+  
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:ecflow_client.NodeRequest.owner)
+}
+#if LANG_CXX11
+inline void NodeRequest::set_owner(::std::string&& value) {
+  
+  owner_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ecflow_client.NodeRequest.owner)
+}
+#endif
+inline void NodeRequest::set_owner(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ecflow_client.NodeRequest.owner)
+}
+inline void NodeRequest::set_owner(const char* value, size_t size) {
+  
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ecflow_client.NodeRequest.owner)
+}
+inline ::std::string* NodeRequest::mutable_owner() {
+  
+  // @@protoc_insertion_point(field_mutable:ecflow_client.NodeRequest.owner)
+  return owner_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* NodeRequest::release_owner() {
+  // @@protoc_insertion_point(field_release:ecflow_client.NodeRequest.owner)
+  
+  return owner_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void NodeRequest::set_allocated_owner(::std::string* owner) {
+  if (owner != NULL) {
+    
+  } else {
+    
+  }
+  owner_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), owner);
+  // @@protoc_insertion_point(field_set_allocated:ecflow_client.NodeRequest.owner)
+}
+
+// string repo = 2;
+inline void NodeRequest::clear_repo() {
+  repo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& NodeRequest::repo() const {
+  // @@protoc_insertion_point(field_get:ecflow_client.NodeRequest.repo)
+  return repo_.GetNoArena();
+}
+inline void NodeRequest::set_repo(const ::std::string& value) {
+  
+  repo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:ecflow_client.NodeRequest.repo)
+}
+#if LANG_CXX11
+inline void NodeRequest::set_repo(::std::string&& value) {
+  
+  repo_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ecflow_client.NodeRequest.repo)
+}
+#endif
+inline void NodeRequest::set_repo(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  repo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ecflow_client.NodeRequest.repo)
+}
+inline void NodeRequest::set_repo(const char* value, size_t size) {
+  
+  repo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ecflow_client.NodeRequest.repo)
+}
+inline ::std::string* NodeRequest::mutable_repo() {
+  
+  // @@protoc_insertion_point(field_mutable:ecflow_client.NodeRequest.repo)
+  return repo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* NodeRequest::release_repo() {
+  // @@protoc_insertion_point(field_release:ecflow_client.NodeRequest.repo)
+  
+  return repo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void NodeRequest::set_allocated_repo(::std::string* repo) {
+  if (repo != NULL) {
+    
+  } else {
+    
+  }
+  repo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), repo);
+  // @@protoc_insertion_point(field_set_allocated:ecflow_client.NodeRequest.repo)
+}
+
+// string host = 3;
+inline void NodeRequest::clear_host() {
+  host_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& NodeRequest::host() const {
+  // @@protoc_insertion_point(field_get:ecflow_client.NodeRequest.host)
+  return host_.GetNoArena();
+}
+inline void NodeRequest::set_host(const ::std::string& value) {
+  
+  host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:ecflow_client.NodeRequest.host)
+}
+#if LANG_CXX11
+inline void NodeRequest::set_host(::std::string&& value) {
+  
+  host_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ecflow_client.NodeRequest.host)
+}
+#endif
+inline void NodeRequest::set_host(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ecflow_client.NodeRequest.host)
+}
+inline void NodeRequest::set_host(const char* value, size_t size) {
+  
+  host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ecflow_client.NodeRequest.host)
+}
+inline ::std::string* NodeRequest::mutable_host() {
+  
+  // @@protoc_insertion_point(field_mutable:ecflow_client.NodeRequest.host)
+  return host_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* NodeRequest::release_host() {
+  // @@protoc_insertion_point(field_release:ecflow_client.NodeRequest.host)
+  
+  return host_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void NodeRequest::set_allocated_host(::std::string* host) {
+  if (host != NULL) {
+    
+  } else {
+    
+  }
+  host_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), host);
+  // @@protoc_insertion_point(field_set_allocated:ecflow_client.NodeRequest.host)
+}
+
+// string port = 4;
+inline void NodeRequest::clear_port() {
+  port_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& NodeRequest::port() const {
+  // @@protoc_insertion_point(field_get:ecflow_client.NodeRequest.port)
+  return port_.GetNoArena();
+}
+inline void NodeRequest::set_port(const ::std::string& value) {
+  
+  port_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:ecflow_client.NodeRequest.port)
+}
+#if LANG_CXX11
+inline void NodeRequest::set_port(::std::string&& value) {
+  
+  port_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ecflow_client.NodeRequest.port)
+}
+#endif
+inline void NodeRequest::set_port(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  port_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ecflow_client.NodeRequest.port)
+}
+inline void NodeRequest::set_port(const char* value, size_t size) {
+  
+  port_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ecflow_client.NodeRequest.port)
+}
+inline ::std::string* NodeRequest::mutable_port() {
+  
+  // @@protoc_insertion_point(field_mutable:ecflow_client.NodeRequest.port)
+  return port_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* NodeRequest::release_port() {
+  // @@protoc_insertion_point(field_release:ecflow_client.NodeRequest.port)
+  
+  return port_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void NodeRequest::set_allocated_port(::std::string* port) {
+  if (port != NULL) {
+    
+  } else {
+    
+  }
+  port_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), port);
+  // @@protoc_insertion_point(field_set_allocated:ecflow_client.NodeRequest.port)
+}
+
+// string path = 5;
+inline void NodeRequest::clear_path() {
+  path_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& NodeRequest::path() const {
+  // @@protoc_insertion_point(field_get:ecflow_client.NodeRequest.path)
+  return path_.GetNoArena();
+}
+inline void NodeRequest::set_path(const ::std::string& value) {
+  
+  path_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:ecflow_client.NodeRequest.path)
+}
+#if LANG_CXX11
+inline void NodeRequest::set_path(::std::string&& value) {
+  
+  path_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ecflow_client.NodeRequest.path)
+}
+#endif
+inline void NodeRequest::set_path(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  path_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ecflow_client.NodeRequest.path)
+}
+inline void NodeRequest::set_path(const char* value, size_t size) {
+  
+  path_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ecflow_client.NodeRequest.path)
+}
+inline ::std::string* NodeRequest::mutable_path() {
+  
+  // @@protoc_insertion_point(field_mutable:ecflow_client.NodeRequest.path)
+  return path_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* NodeRequest::release_path() {
+  // @@protoc_insertion_point(field_release:ecflow_client.NodeRequest.path)
+  
+  return path_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void NodeRequest::set_allocated_path(::std::string* path) {
+  if (path != NULL) {
+    
+  } else {
+    
+  }
+  path_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), path);
+  // @@protoc_insertion_point(field_set_allocated:ecflow_client.NodeRequest.path)
+}
+
+// -------------------------------------------------------------------
+
+// NodeResponse
+
+// string owner = 1;
+inline void NodeResponse::clear_owner() {
+  owner_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& NodeResponse::owner() const {
+  // @@protoc_insertion_point(field_get:ecflow_client.NodeResponse.owner)
+  return owner_.GetNoArena();
+}
+inline void NodeResponse::set_owner(const ::std::string& value) {
+  
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:ecflow_client.NodeResponse.owner)
+}
+#if LANG_CXX11
+inline void NodeResponse::set_owner(::std::string&& value) {
+  
+  owner_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ecflow_client.NodeResponse.owner)
+}
+#endif
+inline void NodeResponse::set_owner(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ecflow_client.NodeResponse.owner)
+}
+inline void NodeResponse::set_owner(const char* value, size_t size) {
+  
+  owner_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ecflow_client.NodeResponse.owner)
+}
+inline ::std::string* NodeResponse::mutable_owner() {
+  
+  // @@protoc_insertion_point(field_mutable:ecflow_client.NodeResponse.owner)
+  return owner_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* NodeResponse::release_owner() {
+  // @@protoc_insertion_point(field_release:ecflow_client.NodeResponse.owner)
+  
+  return owner_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void NodeResponse::set_allocated_owner(::std::string* owner) {
+  if (owner != NULL) {
+    
+  } else {
+    
+  }
+  owner_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), owner);
+  // @@protoc_insertion_point(field_set_allocated:ecflow_client.NodeResponse.owner)
+}
+
+// string repo = 2;
+inline void NodeResponse::clear_repo() {
+  repo_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& NodeResponse::repo() const {
+  // @@protoc_insertion_point(field_get:ecflow_client.NodeResponse.repo)
+  return repo_.GetNoArena();
+}
+inline void NodeResponse::set_repo(const ::std::string& value) {
+  
+  repo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:ecflow_client.NodeResponse.repo)
+}
+#if LANG_CXX11
+inline void NodeResponse::set_repo(::std::string&& value) {
+  
+  repo_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ecflow_client.NodeResponse.repo)
+}
+#endif
+inline void NodeResponse::set_repo(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  repo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ecflow_client.NodeResponse.repo)
+}
+inline void NodeResponse::set_repo(const char* value, size_t size) {
+  
+  repo_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ecflow_client.NodeResponse.repo)
+}
+inline ::std::string* NodeResponse::mutable_repo() {
+  
+  // @@protoc_insertion_point(field_mutable:ecflow_client.NodeResponse.repo)
+  return repo_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* NodeResponse::release_repo() {
+  // @@protoc_insertion_point(field_release:ecflow_client.NodeResponse.repo)
+  
+  return repo_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void NodeResponse::set_allocated_repo(::std::string* repo) {
+  if (repo != NULL) {
+    
+  } else {
+    
+  }
+  repo_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), repo);
+  // @@protoc_insertion_point(field_set_allocated:ecflow_client.NodeResponse.repo)
+}
+
+// string path = 3;
+inline void NodeResponse::clear_path() {
+  path_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& NodeResponse::path() const {
+  // @@protoc_insertion_point(field_get:ecflow_client.NodeResponse.path)
+  return path_.GetNoArena();
+}
+inline void NodeResponse::set_path(const ::std::string& value) {
+  
+  path_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:ecflow_client.NodeResponse.path)
+}
+#if LANG_CXX11
+inline void NodeResponse::set_path(::std::string&& value) {
+  
+  path_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ecflow_client.NodeResponse.path)
+}
+#endif
+inline void NodeResponse::set_path(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  path_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ecflow_client.NodeResponse.path)
+}
+inline void NodeResponse::set_path(const char* value, size_t size) {
+  
+  path_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ecflow_client.NodeResponse.path)
+}
+inline ::std::string* NodeResponse::mutable_path() {
+  
+  // @@protoc_insertion_point(field_mutable:ecflow_client.NodeResponse.path)
+  return path_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* NodeResponse::release_path() {
+  // @@protoc_insertion_point(field_release:ecflow_client.NodeResponse.path)
+  
+  return path_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void NodeResponse::set_allocated_path(::std::string* path) {
+  if (path != NULL) {
+    
+  } else {
+    
+  }
+  path_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), path);
+  // @@protoc_insertion_point(field_set_allocated:ecflow_client.NodeResponse.path)
+}
+
+// string node = 4;
+inline void NodeResponse::clear_node() {
+  node_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& NodeResponse::node() const {
+  // @@protoc_insertion_point(field_get:ecflow_client.NodeResponse.node)
+  return node_.GetNoArena();
+}
+inline void NodeResponse::set_node(const ::std::string& value) {
+  
+  node_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:ecflow_client.NodeResponse.node)
+}
+#if LANG_CXX11
+inline void NodeResponse::set_node(::std::string&& value) {
+  
+  node_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ecflow_client.NodeResponse.node)
+}
+#endif
+inline void NodeResponse::set_node(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  node_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ecflow_client.NodeResponse.node)
+}
+inline void NodeResponse::set_node(const char* value, size_t size) {
+  
+  node_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ecflow_client.NodeResponse.node)
+}
+inline ::std::string* NodeResponse::mutable_node() {
+  
+  // @@protoc_insertion_point(field_mutable:ecflow_client.NodeResponse.node)
+  return node_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* NodeResponse::release_node() {
+  // @@protoc_insertion_point(field_release:ecflow_client.NodeResponse.node)
+  
+  return node_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void NodeResponse::set_allocated_node(::std::string* node) {
+  if (node != NULL) {
+    
+  } else {
+    
+  }
+  node_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), node);
+  // @@protoc_insertion_point(field_set_allocated:ecflow_client.NodeResponse.node)
+}
+
+// .ecflow_client.ResponseStatus response_status = 5;
+inline bool NodeResponse::has_response_status() const {
+  return this != internal_default_instance() && response_status_ != NULL;
+}
+inline void NodeResponse::clear_response_status() {
+  if (GetArenaNoVirtual() == NULL && response_status_ != NULL) {
+    delete response_status_;
+  }
+  response_status_ = NULL;
+}
+inline const ::ecflow_client::ResponseStatus& NodeResponse::_internal_response_status() const {
+  return *response_status_;
+}
+inline const ::ecflow_client::ResponseStatus& NodeResponse::response_status() const {
+  const ::ecflow_client::ResponseStatus* p = response_status_;
+  // @@protoc_insertion_point(field_get:ecflow_client.NodeResponse.response_status)
+  return p != NULL ? *p : *reinterpret_cast<const ::ecflow_client::ResponseStatus*>(
+      &::ecflow_client::_ResponseStatus_default_instance_);
+}
+inline ::ecflow_client::ResponseStatus* NodeResponse::release_response_status() {
+  // @@protoc_insertion_point(field_release:ecflow_client.NodeResponse.response_status)
+  
+  ::ecflow_client::ResponseStatus* temp = response_status_;
+  response_status_ = NULL;
+  return temp;
+}
+inline ::ecflow_client::ResponseStatus* NodeResponse::mutable_response_status() {
+  
+  if (response_status_ == NULL) {
+    auto* p = CreateMaybeMessage<::ecflow_client::ResponseStatus>(GetArenaNoVirtual());
+    response_status_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:ecflow_client.NodeResponse.response_status)
+  return response_status_;
+}
+inline void NodeResponse::set_allocated_response_status(::ecflow_client::ResponseStatus* response_status) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete response_status_;
+  }
+  if (response_status) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      response_status = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, response_status, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  response_status_ = response_status;
+  // @@protoc_insertion_point(field_set_allocated:ecflow_client.NodeResponse.response_status)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

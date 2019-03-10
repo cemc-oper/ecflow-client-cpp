@@ -51,6 +51,13 @@ class EcflowClientService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ecflow_client::StatusResponse>> PrepareAsyncCollectStatus(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ecflow_client::StatusResponse>>(PrepareAsyncCollectStatusRaw(context, request, cq));
     }
+    virtual ::grpc::Status CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::ecflow_client::NodeResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ecflow_client::NodeResponse>> AsyncCollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ecflow_client::NodeResponse>>(AsyncCollectNodeRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ecflow_client::NodeResponse>> PrepareAsyncCollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ecflow_client::NodeResponse>>(PrepareAsyncCollectNodeRaw(context, request, cq));
+    }
     class experimental_async_interface {
      public:
       virtual ~experimental_async_interface() {}
@@ -58,6 +65,8 @@ class EcflowClientService final {
       virtual void CollectStatusRecords(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusRecordsResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void CollectStatus(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void CollectStatus(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void CollectNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::NodeResponse* response, std::function<void(::grpc::Status)>) = 0;
     };
     virtual class experimental_async_interface* experimental_async() { return nullptr; }
   private:
@@ -65,6 +74,8 @@ class EcflowClientService final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::ecflow_client::StatusRecordsResponse>* PrepareAsyncCollectStatusRecordsRaw(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::ecflow_client::StatusResponse>* AsyncCollectStatusRaw(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::ecflow_client::StatusResponse>* PrepareAsyncCollectStatusRaw(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ecflow_client::NodeResponse>* AsyncCollectNodeRaw(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::ecflow_client::NodeResponse>* PrepareAsyncCollectNodeRaw(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -83,6 +94,13 @@ class EcflowClientService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ecflow_client::StatusResponse>> PrepareAsyncCollectStatus(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ecflow_client::StatusResponse>>(PrepareAsyncCollectStatusRaw(context, request, cq));
     }
+    ::grpc::Status CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::ecflow_client::NodeResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ecflow_client::NodeResponse>> AsyncCollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ecflow_client::NodeResponse>>(AsyncCollectNodeRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ecflow_client::NodeResponse>> PrepareAsyncCollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ecflow_client::NodeResponse>>(PrepareAsyncCollectNodeRaw(context, request, cq));
+    }
     class experimental_async final :
       public StubInterface::experimental_async_interface {
      public:
@@ -90,6 +108,8 @@ class EcflowClientService final {
       void CollectStatusRecords(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusRecordsResponse* response, std::function<void(::grpc::Status)>) override;
       void CollectStatus(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response, std::function<void(::grpc::Status)>) override;
       void CollectStatus(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusResponse* response, std::function<void(::grpc::Status)>) override;
+      void CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response, std::function<void(::grpc::Status)>) override;
+      void CollectNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::NodeResponse* response, std::function<void(::grpc::Status)>) override;
      private:
       friend class Stub;
       explicit experimental_async(Stub* stub): stub_(stub) { }
@@ -105,8 +125,11 @@ class EcflowClientService final {
     ::grpc::ClientAsyncResponseReader< ::ecflow_client::StatusRecordsResponse>* PrepareAsyncCollectStatusRecordsRaw(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::ecflow_client::StatusResponse>* AsyncCollectStatusRaw(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::ecflow_client::StatusResponse>* PrepareAsyncCollectStatusRaw(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::ecflow_client::NodeResponse>* AsyncCollectNodeRaw(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::ecflow_client::NodeResponse>* PrepareAsyncCollectNodeRaw(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_CollectStatusRecords_;
     const ::grpc::internal::RpcMethod rpcmethod_CollectStatus_;
+    const ::grpc::internal::RpcMethod rpcmethod_CollectNode_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -116,6 +139,7 @@ class EcflowClientService final {
     virtual ~Service();
     virtual ::grpc::Status CollectStatusRecords(::grpc::ServerContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusRecordsResponse* response);
     virtual ::grpc::Status CollectStatus(::grpc::ServerContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response);
+    virtual ::grpc::Status CollectNode(::grpc::ServerContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_CollectStatusRecords : public BaseClass {
@@ -157,7 +181,27 @@ class EcflowClientService final {
       ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_CollectStatusRecords<WithAsyncMethod_CollectStatus<Service > > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_CollectNode : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_CollectNode() {
+      ::grpc::Service::MarkMethodAsync(2);
+    }
+    ~WithAsyncMethod_CollectNode() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CollectNode(::grpc::ServerContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestCollectNode(::grpc::ServerContext* context, ::ecflow_client::NodeRequest* request, ::grpc::ServerAsyncResponseWriter< ::ecflow_client::NodeResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_CollectStatusRecords<WithAsyncMethod_CollectStatus<WithAsyncMethod_CollectNode<Service > > > AsyncService;
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_CollectStatusRecords : public BaseClass {
    private:
@@ -208,7 +252,32 @@ class EcflowClientService final {
     }
     virtual void CollectStatus(::grpc::ServerContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
-  typedef ExperimentalWithCallbackMethod_CollectStatusRecords<ExperimentalWithCallbackMethod_CollectStatus<Service > > ExperimentalCallbackService;
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_CollectNode : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithCallbackMethod_CollectNode() {
+      ::grpc::Service::experimental().MarkMethodCallback(2,
+        new ::grpc::internal::CallbackUnaryHandler< ::ecflow_client::NodeRequest, ::ecflow_client::NodeResponse>(
+          [this](::grpc::ServerContext* context,
+                 const ::ecflow_client::NodeRequest* request,
+                 ::ecflow_client::NodeResponse* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   return this->CollectNode(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithCallbackMethod_CollectNode() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CollectNode(::grpc::ServerContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void CollectNode(::grpc::ServerContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  typedef ExperimentalWithCallbackMethod_CollectStatusRecords<ExperimentalWithCallbackMethod_CollectStatus<ExperimentalWithCallbackMethod_CollectNode<Service > > > ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_CollectStatusRecords : public BaseClass {
    private:
@@ -239,6 +308,23 @@ class EcflowClientService final {
     }
     // disable synchronous version of this method
     ::grpc::Status CollectStatus(::grpc::ServerContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_CollectNode : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_CollectNode() {
+      ::grpc::Service::MarkMethodGeneric(2);
+    }
+    ~WithGenericMethod_CollectNode() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CollectNode(::grpc::ServerContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -281,6 +367,26 @@ class EcflowClientService final {
     }
     void RequestCollectStatus(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_CollectNode : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_CollectNode() {
+      ::grpc::Service::MarkMethodRaw(2);
+    }
+    ~WithRawMethod_CollectNode() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CollectNode(::grpc::ServerContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestCollectNode(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -334,6 +440,31 @@ class EcflowClientService final {
     virtual void CollectStatus(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_CollectNode : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    ExperimentalWithRawCallbackMethod_CollectNode() {
+      ::grpc::Service::experimental().MarkMethodRawCallback(2,
+        new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          [this](::grpc::ServerContext* context,
+                 const ::grpc::ByteBuffer* request,
+                 ::grpc::ByteBuffer* response,
+                 ::grpc::experimental::ServerCallbackRpcController* controller) {
+                   this->CollectNode(context, request, response, controller);
+                 }));
+    }
+    ~ExperimentalWithRawCallbackMethod_CollectNode() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CollectNode(::grpc::ServerContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual void CollectNode(::grpc::ServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_CollectStatusRecords : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
@@ -373,9 +504,29 @@ class EcflowClientService final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedCollectStatus(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::ecflow_client::StatusRequest,::ecflow_client::StatusResponse>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_CollectStatusRecords<WithStreamedUnaryMethod_CollectStatus<Service > > StreamedUnaryService;
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_CollectNode : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_CollectNode() {
+      ::grpc::Service::MarkMethodStreamed(2,
+        new ::grpc::internal::StreamedUnaryHandler< ::ecflow_client::NodeRequest, ::ecflow_client::NodeResponse>(std::bind(&WithStreamedUnaryMethod_CollectNode<BaseClass>::StreamedCollectNode, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_CollectNode() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status CollectNode(::grpc::ServerContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedCollectNode(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::ecflow_client::NodeRequest,::ecflow_client::NodeResponse>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_CollectStatusRecords<WithStreamedUnaryMethod_CollectStatus<WithStreamedUnaryMethod_CollectNode<Service > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_CollectStatusRecords<WithStreamedUnaryMethod_CollectStatus<Service > > StreamedService;
+  typedef WithStreamedUnaryMethod_CollectStatusRecords<WithStreamedUnaryMethod_CollectStatus<WithStreamedUnaryMethod_CollectNode<Service > > > StreamedService;
 };
 
 }  // namespace ecflow_client

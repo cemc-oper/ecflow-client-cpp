@@ -21,6 +21,7 @@ namespace ecflow_client {
 static const char* EcflowClientService_method_names[] = {
   "/ecflow_client.EcflowClientService/CollectStatusRecords",
   "/ecflow_client.EcflowClientService/CollectStatus",
+  "/ecflow_client.EcflowClientService/CollectNode",
 };
 
 std::unique_ptr< EcflowClientService::Stub> EcflowClientService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -32,6 +33,7 @@ std::unique_ptr< EcflowClientService::Stub> EcflowClientService::NewStub(const s
 EcflowClientService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
   : channel_(channel), rpcmethod_CollectStatusRecords_(EcflowClientService_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_CollectStatus_(EcflowClientService_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CollectNode_(EcflowClientService_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status EcflowClientService::Stub::CollectStatusRecords(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::ecflow_client::StatusRecordsResponse* response) {
@@ -74,6 +76,26 @@ void EcflowClientService::Stub::experimental_async::CollectStatus(::grpc::Client
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::StatusResponse>::Create(channel_.get(), cq, rpcmethod_CollectStatus_, context, request, false);
 }
 
+::grpc::Status EcflowClientService::Stub::CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::ecflow_client::NodeResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_CollectNode_, context, request, response);
+}
+
+void EcflowClientService::Stub::experimental_async::CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CollectNode_, context, request, response, std::move(f));
+}
+
+void EcflowClientService::Stub::experimental_async::CollectNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::NodeResponse* response, std::function<void(::grpc::Status)> f) {
+  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CollectNode_, context, request, response, std::move(f));
+}
+
+::grpc::ClientAsyncResponseReader< ::ecflow_client::NodeResponse>* EcflowClientService::Stub::AsyncCollectNodeRaw(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::NodeResponse>::Create(channel_.get(), cq, rpcmethod_CollectNode_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::ecflow_client::NodeResponse>* EcflowClientService::Stub::PrepareAsyncCollectNodeRaw(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::NodeResponse>::Create(channel_.get(), cq, rpcmethod_CollectNode_, context, request, false);
+}
+
 EcflowClientService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       EcflowClientService_method_names[0],
@@ -85,6 +107,11 @@ EcflowClientService::Service::Service() {
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< EcflowClientService::Service, ::ecflow_client::StatusRequest, ::ecflow_client::StatusResponse>(
           std::mem_fn(&EcflowClientService::Service::CollectStatus), this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      EcflowClientService_method_names[2],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< EcflowClientService::Service, ::ecflow_client::NodeRequest, ::ecflow_client::NodeResponse>(
+          std::mem_fn(&EcflowClientService::Service::CollectNode), this)));
 }
 
 EcflowClientService::Service::~Service() {
@@ -98,6 +125,13 @@ EcflowClientService::Service::~Service() {
 }
 
 ::grpc::Status EcflowClientService::Service::CollectStatus(::grpc::ServerContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status EcflowClientService::Service::CollectNode(::grpc::ServerContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response) {
   (void) context;
   (void) request;
   (void) response;
