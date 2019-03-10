@@ -1,15 +1,24 @@
+#include <ecflow_client.grpc.pb.h>
+#include <CLIUtils/CLI11.hpp>
+
+#include <grpcpp/grpcpp.h>
 #include <iostream>
 
-#include <ecflow_client.grpc.pb.h>
-#include <grpcpp/grpcpp.h>
+int main(int argc, char** argv){
+    CLI::App app{"A gRPC client for ecflow"};
 
-int main(int argv, char** argc){
+    std::string rpc_target;
+
+    app.add_option("--rpc-target", rpc_target, "RPC target")->required();
+
+    CLI11_PARSE(app, argc, argv)
+
     grpc::ChannelArguments args;
     args.SetCompressionAlgorithm(GRPC_COMPRESS_GZIP);
 
     auto stub_ = ecflow_client::EcflowClientService::NewStub(
         grpc::CreateCustomChannel(
-            "0.0.0.0:50051",
+            rpc_target,
             grpc::InsecureChannelCredentials(),args));
 
     ecflow_client::StatusRequest request;

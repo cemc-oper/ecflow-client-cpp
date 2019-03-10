@@ -1,9 +1,9 @@
 #include "ecflow_client_service_impl.h"
 
 #include <spdlog/spdlog.h>
+#include <CLIUtils/CLI11.hpp>
 
-void RunServer() {
-    std::string server_address("0.0.0.0:50051");
+void RunServer(const std::string &server_address) {
     EcflowClientServiceImpl service;
     grpc::ServerBuilder builder;
 
@@ -18,7 +18,15 @@ void RunServer() {
 }
 
 int main(int argc, char** argv){
-    RunServer();
+    CLI::App app{"A gRPC server for ecflow"};
+
+    std::string rpc_target;
+
+    app.add_option("--rpc-target", rpc_target, "RPC target")->required();
+
+    CLI11_PARSE(app, argc, argv)
+
+    RunServer(rpc_target);
 
     return 0;
 }
