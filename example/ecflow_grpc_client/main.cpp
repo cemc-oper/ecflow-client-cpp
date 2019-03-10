@@ -8,8 +8,16 @@ int main(int argc, char** argv){
     CLI::App app{"A gRPC client for ecflow"};
 
     std::string rpc_target;
+    std::string host;
+    std::string port;
+    std::string owner;
+    std::string repo;
 
     app.add_option("--rpc-target", rpc_target, "RPC target")->required();
+    app.add_option("--host", host, "host")->required();
+    app.add_option("--port", port, "port")->required();
+    app.add_option("--owner", owner, "owner")->required();
+    app.add_option("--repo", repo, "host")->required();
 
     CLI11_PARSE(app, argc, argv)
 
@@ -22,10 +30,10 @@ int main(int argc, char** argv){
             grpc::InsecureChannelCredentials(),args));
 
     ecflow_client::StatusRequest request;
-    request.set_host("10.40.143.18");
-    request.set_port("31071");
-    request.set_owner("nwp_xp");
-    request.set_repo("nwpc_pd_bk");
+    request.set_host(host);
+    request.set_port(port);
+    request.set_owner(owner);
+    request.set_repo(repo);
 
     ecflow_client::StatusRecordsResponse response;
     grpc::ClientContext context;
