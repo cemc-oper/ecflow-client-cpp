@@ -1,7 +1,8 @@
 project(ecflow_util)
 
-set(ECFLOW_BUILD_DIR /home/wangdp/app/ecmwf/ecflow/build)
-set(ECFLOW_SOURCE_DIR /home/wangdp/app/ecmwf/ecflow/ecFlow-4.9.0-Source)
+if(NOT ECFLOW_BUILD_DIR OR NOT ECFLOW_SOURCE_DIR)
+    message(FATAL_ERROR "Please set ECFLOW_BUILD_DIR and ECFLOW_SOURCE_DIR")
+endif()
 
 find_package(Boost
     REQUIRED
