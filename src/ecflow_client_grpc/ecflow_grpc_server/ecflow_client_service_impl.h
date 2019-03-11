@@ -19,5 +19,10 @@ public:
         const ::ecflow_client::StatusRequest* request,
         ::ecflow_client::StatusResponse* response) override;
 
+    ::grpc::Status CollectNode(
+        ::grpc::ServerContext* context,
+        const ::ecflow_client::NodeRequest* request,
+        ::ecflow_client::NodeResponse* response);
+
 };
 
