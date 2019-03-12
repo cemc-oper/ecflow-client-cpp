@@ -67,7 +67,7 @@ private:
         workflow_node->setName(ecf_node->name());
         workflow_node->setNodeStatus(WorkflowModel::getNodeStatus(DState::toString(ecf_node->dstate())));
 
-        WorkflowModel::VariableList variable_list;
+        WorkflowModel::WorkflowNodeVariables variable_list;
         variable_list.path_ = ecf_node->absNodePath();
 
         auto variables = ecf_node->variables();

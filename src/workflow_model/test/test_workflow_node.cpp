@@ -13,7 +13,7 @@ protected:
 };
 using namespace WorkflowModel;
 TEST_F(WorkflowNodeTest, MethodVariableListToJson) {
-	VariableList l;
+	WorkflowNodeVariables l;
 	l.path_ = "/meso_post/00/initial";
 	l.variable_list_ = std::vector<NodeVariable>{
 		NodeVariable{NodeVariableType::Variable, "VAR1", "var1_value"},
@@ -50,7 +50,7 @@ TEST_F(WorkflowNodeTest, MethodToJson) {
 		NodeVariable{NodeVariableType::GeneratedVariable, "ECF_NAME", "/meso_post/00/initail"},
 	};
 
-	VariableList hh_var_list;
+	WorkflowNodeVariables hh_var_list;
 	hh_var_list.path_ = "/meso_post/00";
 	hh_var_list.variable_list_ = std::vector<NodeVariable>{
 		NodeVariable{NodeVariableType::Variable, "HH", "00"},
@@ -61,7 +61,7 @@ TEST_F(WorkflowNodeTest, MethodToJson) {
 	};
 	node.inheritedVariableList().push_back(hh_var_list);
 
-	VariableList suite_var_list;
+	WorkflowNodeVariables suite_var_list;
 	suite_var_list.path_ = "/meso_post";
 	suite_var_list.variable_list_ = std::vector<NodeVariable>{
 		NodeVariable{NodeVariableType::Variable, "SUITE", "meso_post"},

@@ -52,7 +52,7 @@ int main(int argc, char** argv){
         if(response.response_status().has_error()){
             spdlog::warn("[{0}/{1}] get records...failed: {2}", owner, repo, response.response_status().error_string());
         } else {
-            const auto node_json_string = response.node();
+            const auto &node_json_string = response.node();
             auto node_json = nlohmann::json::parse(node_json_string);
             std::cout<<node_json.dump(2)<<std::endl;
         }

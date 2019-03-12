@@ -10,7 +10,7 @@
 
 namespace WorkflowModel {
 
-struct VariableList {
+struct WorkflowNodeVariables {
 
 	nlohmann::json toJson() const;
 
@@ -35,11 +35,11 @@ public:
 		node_type_ = type;
 	}
 
-	VariableList &variableList() {
+	WorkflowNodeVariables &variableList() {
 		return variable_list_;
 	}
 
-	std::vector<VariableList> &inheritedVariableList() {
+	std::vector<WorkflowNodeVariables> &inheritedVariableList() {
 		return inherited_variable_list_;
 	}
 
@@ -50,8 +50,8 @@ private:
 	NodeStatus status_ = NodeStatus::unknown;
 	NodeType node_type_ = NodeType::Unknown;
 
-	VariableList variable_list_;
-	std::vector<VariableList> inherited_variable_list_;
+	WorkflowNodeVariables variable_list_;
+	std::vector<WorkflowNodeVariables> inherited_variable_list_;
 };
 
 } // namespace WorkflowModel

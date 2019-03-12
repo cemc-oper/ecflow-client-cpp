@@ -3,7 +3,7 @@
 namespace WorkflowModel {
 using json = nlohmann::json;
 
-json VariableList::toJson() const
+json WorkflowNodeVariables::toJson() const
 {
 	json j;
 	j["path"] = path_;
