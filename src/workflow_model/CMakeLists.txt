@@ -24,7 +24,7 @@ target_link_libraries(workflow_model
         Boost::boost)
 
 
-add_library(EclfowClient::workflow_model ALIAS workflow_model)
+add_library(EclfowClientCPP::workflow_model ALIAS workflow_model)
 
 if(ENABLE_TESTS)
     enable_testing()

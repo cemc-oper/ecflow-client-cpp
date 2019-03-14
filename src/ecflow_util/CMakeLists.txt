@@ -53,4 +53,4 @@ target_link_libraries(ecflow_util
         Boost::regex
     )
 
-add_library(EclfowClient::ecflow_util ALIAS ecflow_util)
+add_library(EclfowClientCPP::ecflow_util ALIAS ecflow_util)
