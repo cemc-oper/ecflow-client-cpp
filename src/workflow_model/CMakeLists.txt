@@ -11,7 +11,6 @@ target_sources(workflow_model PRIVATE
 
 target_include_directories(workflow_model
     PUBLIC
-        $<INSTALL_INTERFACE:include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
         $<BUILD_INTERFACE:${ecflow_client_cpp_SOURCE_DIR}/vendor>
     )
