@@ -2,16 +2,14 @@ project(workflow_model)
 
 find_package(Boost REQUIRED)
 
-set(SOURCE_FILES
+add_library(workflow_model STATIC)
+
+target_sources(workflow_model PRIVATE
     src/node_status.cpp
     src/node.cpp
     src/bunch.cpp
     src/node_variable.cpp
-	src/workflow_node.cpp
-    )
-
-add_library(workflow_model STATIC
-    ${SOURCE_FILES})
+    src/workflow_node.cpp)
 
 target_include_directories(workflow_model
     PUBLIC

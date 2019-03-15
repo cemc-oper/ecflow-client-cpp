@@ -12,9 +12,13 @@ set(SRC_FILES
     main.cpp
     )
 
-add_executable(ecflow_grpc_server
-    ${SRC_FILES}
-    )
+add_executable(ecflow_grpc_server)
+
+target_sources(ecflow_grpc_server PRIVATE
+    ${ecflow_client_grpc_SOURCE_DIR}/ecflow_client.grpc.pb.cc
+    ${ecflow_client_grpc_SOURCE_DIR}/ecflow_client.pb.cc
+    ecflow_client_service_impl.cpp
+    main.cpp)
 
 target_include_directories(ecflow_grpc_server
     PRIVATE
