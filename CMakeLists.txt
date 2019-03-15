@@ -3,6 +3,8 @@ project(ecflow_client_cpp)
 
 set(CMAKE_CXX_STANDARD 14)
 
+set(EcflowClientCPP_VERSION 0.0.1)
+
 option(ENABLE_TESTS "Enable tests" OFF)
 
 if(ENABLE_TESTS)
@@ -13,3 +15,25 @@ endif()
 
 add_subdirectory(src)
 add_subdirectory(example)
+
+install(TARGETS workflow_model ecflow_util ecflow_grpc_server
+    EXPORT EcflowClientCppTargets
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+    RUNTIME DESTINATION bin
+    INCLUDES DESTINATION include
+    )
+
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file(
+    EcflowClientCppConfigVersion.cmake
+    VERSION ${EcflowClientCPP_VERSION}
+    COMPATIBILITY AnyNewerVersion
+)
+
+install(EXPORT EcflowClientCppTargets
+    FILE EcflowClientCppTargets.cmake
+    NAMESPACE EcflowClientCPP::
+    DESTINATION lib/cmake/EcflowClientCPP)
+
+

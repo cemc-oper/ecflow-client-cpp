@@ -30,7 +30,7 @@ target_include_directories(ecflow_util
         ${ECFLOW_SOURCE_DIR}/CSim/src
         ${ECFLOW_SOURCE_DIR}/Client/src
     INTERFACE
-        ${ecflow_util_SOURCE_DIR}/src
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
     )
 
 target_link_libraries(ecflow_util

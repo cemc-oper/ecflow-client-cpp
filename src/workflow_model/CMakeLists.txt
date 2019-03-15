@@ -15,16 +15,25 @@ add_library(workflow_model STATIC
 
 target_include_directories(workflow_model
     PUBLIC
-        ${PROJECT_SOURCE_DIR}/src
-        ${ecflow_client_cpp_SOURCE_DIR}/vendor
+        $<INSTALL_INTERFACE:include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+        $<BUILD_INTERFACE:${ecflow_client_cpp_SOURCE_DIR}/vendor>
     )
 
 target_link_libraries(workflow_model
     PUBLIC
         Boost::boost)
 
-
 add_library(EclfowClientCPP::workflow_model ALIAS workflow_model)
+
+install(FILES
+    src/bunch.h
+    src/node.h
+    src/node_status.h
+    src/node_type.h
+    src/node_variable.h
+    src/workflow_node.h
+    DESTINATION include)
 
 if(ENABLE_TESTS)
     enable_testing()
