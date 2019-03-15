@@ -1,5 +1,4 @@
-add_executable(test_workflow_model
-	${TEST_MAIN_SRCS})
+add_executable(test_workflow_model)
 
 target_sources(test_workflow_model PRIVATE
 	test_node.cpp

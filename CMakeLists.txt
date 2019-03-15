@@ -14,9 +14,10 @@ endif()
 
 add_subdirectory(external)
 add_subdirectory(src)
+add_subdirectory(vendor)
 add_subdirectory(example)
 
-install(TARGETS workflow_model ecflow_util ecflow_grpc_server Ecflow
+install(TARGETS workflow_model ecflow_util ecflow_grpc_server vendor Ecflow
     EXPORT EcflowClientCppTargets
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
