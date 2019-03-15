@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <bunch.h>
+#include "../include/ecflow_client/workflow_model/bunch.h"
 
 namespace {
 class BunchTest: public ::testing::Test{

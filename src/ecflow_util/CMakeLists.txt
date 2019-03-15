@@ -10,8 +10,9 @@ target_sources(ecflow_util PRIVATE
     src/ecflow_client.cpp)
 
 target_include_directories(ecflow_util
-    INTERFACE
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+    PUBLIC
+        $<INSTALL_INTERFACE:include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     )
 
 target_link_libraries(ecflow_util
@@ -30,3 +31,6 @@ target_link_libraries(ecflow_util
     )
 
 add_library(EclfowClientCPP::ecflow_util ALIAS ecflow_util)
+
+install(DIRECTORY include/ecflow_client
+    DESTINATION include)

@@ -1,4 +1,4 @@
-#include "ecflow_client.h"
+#include <ecflow_client/ecflow_client.h>
 
 #include <ClientInvoker.hpp>
 #include <Defs.hpp>

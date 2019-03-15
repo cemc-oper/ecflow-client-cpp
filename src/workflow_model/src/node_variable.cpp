@@ -1,4 +1,4 @@
-#include "node_variable.h"
+#include <ecflow_client/workflow_model/node_variable.h>
 
 namespace WorkflowModel{
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <bunch.h>
-#include <workflow_node.h>
+#include "ecflow_client/workflow_model/bunch.h"
+#include "ecflow_client/workflow_model/workflow_node.h"
 
 namespace EcflowUtil{
 

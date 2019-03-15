@@ -1,4 +1,4 @@
-#include "bunch.h"
+#include <ecflow_client/workflow_model/bunch.h>
 
 #include <boost/algorithm/string.hpp>
 

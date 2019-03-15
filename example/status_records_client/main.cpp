@@ -1,4 +1,4 @@
-#include <ecflow_client.grpc.pb.h>
+#include <ecflow_client/ecflow_client.grpc.pb.h>
 #include <CLIUtils/CLI11.hpp>
 #include <spdlog/spdlog.h>
 

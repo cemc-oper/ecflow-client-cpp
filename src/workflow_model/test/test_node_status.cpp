@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <node_status.h>
+#include "../include/ecflow_client/workflow_model/node_status.h"
 
 namespace {
 class NodeStatusTest: public ::testing::Test {

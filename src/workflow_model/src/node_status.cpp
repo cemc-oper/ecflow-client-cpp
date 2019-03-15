@@ -1,8 +1,4 @@
-//
-// Created by windroc on 2019/2/28.
-//
-
-#include "node_status.h"
+#include <ecflow_client/workflow_model/node_status.h>
 
 namespace WorkflowModel{
 NodeStatus getNodeStatus(const std::string &status) {

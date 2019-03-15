@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ecflow_client.grpc.pb.h>
+#include <ecflow_client/ecflow_client.grpc.pb.h>
 
 #include <grpcpp/grpcpp.h>
 

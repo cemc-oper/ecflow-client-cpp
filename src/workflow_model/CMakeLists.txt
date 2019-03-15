@@ -11,8 +11,8 @@ target_sources(workflow_model PRIVATE
 
 target_include_directories(workflow_model
     PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-        $<BUILD_INTERFACE:${ecflow_client_cpp_SOURCE_DIR}/vendor>
+        $<INSTALL_INTERFACE:include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     )
 
 target_link_libraries(workflow_model
@@ -23,13 +23,7 @@ target_link_libraries(workflow_model
 
 add_library(EclfowClientCPP::workflow_model ALIAS workflow_model)
 
-install(FILES
-    src/bunch.h
-    src/node.h
-    src/node_status.h
-    src/node_type.h
-    src/node_variable.h
-    src/workflow_node.h
+install(DIRECTORY include/ecflow_client
     DESTINATION include)
 
 if(ENABLE_TESTS)

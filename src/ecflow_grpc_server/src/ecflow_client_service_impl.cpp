@@ -1,6 +1,6 @@
 #include "ecflow_client_service_impl.h"
 
-#include <ecflow_client.h>
+#include "../../ecflow_util/include/ecflow_client/ecflow_client.h"
 
 #include <spdlog/spdlog.h>
 #include <nlohmann/json.hpp>

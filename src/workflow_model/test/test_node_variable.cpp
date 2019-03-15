@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <node_variable.h>
+#include "../include/ecflow_client/workflow_model/node_variable.h"
 
 namespace {
 class NodeVariableTest : public ::testing::Test {

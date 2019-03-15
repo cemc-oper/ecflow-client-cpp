@@ -1,4 +1,4 @@
-#include "node.h"
+#include <ecflow_client/workflow_model/node.h>
 
 #include <boost/algorithm/string.hpp>
 

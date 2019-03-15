@@ -1,4 +1,4 @@
-#include "workflow_node.h"
+#include <ecflow_client/workflow_model/workflow_node.h>
 
 namespace WorkflowModel {
 using json = nlohmann::json;

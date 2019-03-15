@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <workflow_node.h>
+#include "../include/ecflow_client/workflow_model/workflow_node.h"
 
 #include <iostream>
 
