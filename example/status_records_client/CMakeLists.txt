@@ -1,8 +1,5 @@
 project(status_records_client)
 
-find_package(Protobuf CONFIG REQUIRED)
-find_package(gRPC CONFIG REQUIRED)
-
 add_executable(status_records_client)
 
 target_sources(status_records_client PRIVATE

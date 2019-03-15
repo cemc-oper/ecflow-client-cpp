@@ -1,8 +1,5 @@
 project(node_client)
 
-find_package(Protobuf CONFIG REQUIRED)
-find_package(gRPC CONFIG REQUIRED)
-
 add_executable(node_client)
 
 target_sources(node_client PRIVATE

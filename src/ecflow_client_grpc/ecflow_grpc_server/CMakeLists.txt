@@ -1,8 +1,5 @@
 project(ecflow_grpc_server)
 
-find_package(Protobuf CONFIG REQUIRED)
-find_package(gRPC CONFIG REQUIRED)
-
 find_package(Boost REQUIRED)
 
 set(SRC_FILES

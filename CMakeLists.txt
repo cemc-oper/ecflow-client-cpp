@@ -9,14 +9,14 @@ option(ENABLE_TESTS "Enable tests" OFF)
 
 if(ENABLE_TESTS)
     message("ENABLE TESTS...")
-    find_package(GTest REQUIRED)
     enable_testing()
 endif()
 
+add_subdirectory(external)
 add_subdirectory(src)
 add_subdirectory(example)
 
-install(TARGETS workflow_model ecflow_util ecflow_grpc_server
+install(TARGETS workflow_model ecflow_util ecflow_grpc_server Ecflow
     EXPORT EcflowClientCppTargets
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib

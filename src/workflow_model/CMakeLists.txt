@@ -1,7 +1,5 @@
 project(workflow_model)
 
-find_package(Boost REQUIRED)
-
 add_library(workflow_model STATIC)
 
 target_sources(workflow_model PRIVATE
