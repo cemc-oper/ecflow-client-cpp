@@ -72,8 +72,12 @@ EcflowClientServiceImpl::CollectNode(
     ::ecflow_client::NodeRequest *request,
     ::ecflow_client::NodeResponse *response) {
 
+    spdlog::info("[{0}/{1}] receive node request...", request->owner(), request->repo());
+
     response->set_owner(request->owner());
     response->set_repo(request->repo());
+
+    spdlog::info("[{0}/{1}] getting node from server...", request->owner(), request->repo());
 
     EcflowUtil::EcflowClient client{request->host(), request->port()};
 
@@ -88,8 +92,10 @@ EcflowClientServiceImpl::CollectNode(
     if(!node){
         response->mutable_response_status()->set_has_error(true);
         response->mutable_response_status()->set_error_string("node path doesn't exist.");
+        spdlog::info("[{0}/{1}] getting node from server...failed", request->owner(), request->repo());
         return grpc::Status::OK;
     }
+    spdlog::info("[{0}/{1}] getting node from server...done", request->owner(), request->repo());
 
     response->set_node(node->toJson().dump());
 
