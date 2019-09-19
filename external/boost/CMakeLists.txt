@@ -11,6 +11,7 @@ find_package(Boost
     serialization
     thread
     regex
+    atomic
     )
 
 if (Boost_FOUND)
@@ -24,6 +25,7 @@ if (Boost_FOUND)
         Boost::serialization
         Boost::thread
         Boost::regex
+        Boost::atomic
         PROPERTIES IMPORTED_GLOBAL TRUE
     )
 endif ()
