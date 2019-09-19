@@ -5,16 +5,17 @@
 
 namespace WorkflowModel {
 
-struct NodeStatusRecord{
+struct NodeStatusRecord {
     std::string path_;
     std::string status_;
 
     nlohmann::json toJson() const;
 };
 
-class Bunch: public Node {
+class Bunch : public Node {
 public:
     Bunch();
+
     explicit Bunch(const std::string &name, NodeStatus status = NodeStatus::unknown);
 
     ~Bunch() override = default;

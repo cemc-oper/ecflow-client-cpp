@@ -2,35 +2,34 @@
 
 #include <boost/algorithm/string.hpp>
 
-namespace WorkflowModel{
+namespace WorkflowModel {
 
 using json = nlohmann::json;
 
 json NodeStatusRecord::toJson() const {
     json j{
-        {"path", path_},
+        {"path",   path_},
         {"status", status_}
     };
     return j;
 }
 
-Bunch::Bunch():
-    Node{}{
+Bunch::Bunch() :
+    Node{} {
 
 }
 
-Bunch::Bunch(const std::string &name, NodeStatus status):
-    Node{name, status}
-{
+Bunch::Bunch(const std::string &name, NodeStatus status) :
+    Node{name, status} {
 
 }
 
 std::shared_ptr<Node> Bunch::findNode(const std::string &node_path) {
-    if(node_path.length()==0){
+    if (node_path.length() == 0) {
         return std::shared_ptr<Node>();
     }
 
-    if(node_path == "/"){
+    if (node_path == "/") {
         return shared_from_this();
     }
 
@@ -40,15 +39,15 @@ std::shared_ptr<Node> Bunch::findNode(const std::string &node_path) {
     tokens.erase(tokens.begin());
 
     auto cur_node = shared_from_this();
-    for(auto &token: tokens){
+    for (auto &token: tokens) {
         std::shared_ptr<Node> t_node;
-        for(auto &child: cur_node->children()){
-            if(child->name() == token){
+        for (auto &child: cur_node->children()) {
+            if (child->name() == token) {
                 t_node = child;
                 break;
             }
         }
-        if(!t_node){
+        if (!t_node) {
             return nullptr;
         }
         cur_node = t_node;
@@ -57,7 +56,7 @@ std::shared_ptr<Node> Bunch::findNode(const std::string &node_path) {
 }
 
 std::shared_ptr<Node> Bunch::addNode(const std::string &node_path) {
-    if(node_path == "/"){
+    if (node_path == "/") {
         return shared_from_this();
     }
 
@@ -68,15 +67,15 @@ std::shared_ptr<Node> Bunch::addNode(const std::string &node_path) {
     tokens.erase(tokens.begin());
 
     auto cur_node = shared_from_this();
-    for(auto &token: tokens){
+    for (auto &token: tokens) {
         std::shared_ptr<Node> t_node;
-        for(auto &child: cur_node->children()){
-            if(child->name() == token){
+        for (auto &child: cur_node->children()) {
+            if (child->name() == token) {
                 t_node = child;
                 break;
             }
         }
-        if(!t_node){
+        if (!t_node) {
             t_node = std::make_shared<Node>(token);
             cur_node->addChild(t_node);
         }

@@ -3,23 +3,25 @@
 #include "ecflow_client/workflow_model/bunch.h"
 #include "ecflow_client/workflow_model/workflow_node.h"
 
-namespace EcflowUtil{
+namespace EcflowUtil {
 
 class EcflowClientPrivate;
 
 class EcflowClient {
 public:
     EcflowClient() = delete;
+
     EcflowClient(const std::string &host, const std::string &port);
+
     ~EcflowClient();
 
     int sync();
 
-    std::shared_ptr<WorkflowModel::Bunch> bunch(){
+    std::shared_ptr<WorkflowModel::Bunch> bunch() {
         return bunch_;
     }
 
-    std::vector<WorkflowModel::NodeStatusRecord> statusRecords(){
+    std::vector<WorkflowModel::NodeStatusRecord> statusRecords() {
         return status_records_;
     }
 
@@ -28,7 +30,7 @@ public:
     std::string errorMessage();
 
 private:
-    EcflowClientPrivate* p_;
+    EcflowClientPrivate *p_;
 
     std::string host_;
     std::string port_;

@@ -1,7 +1,7 @@
 
-if(NOT ECFLOW_BUILD_DIR OR NOT ECFLOW_SOURCE_DIR)
+if (NOT ECFLOW_BUILD_DIR OR NOT ECFLOW_SOURCE_DIR)
     message(FATAL_ERROR "Please set ECFLOW_BUILD_DIR and ECFLOW_SOURCE_DIR")
-endif()
+endif ()
 
 add_library(Ecflow INTERFACE)
 
@@ -14,7 +14,7 @@ target_include_directories(Ecflow INTERFACE
     ${ECFLOW_SOURCE_DIR}/Base/src/stc
     ${ECFLOW_SOURCE_DIR}/CSim/src
     ${ECFLOW_SOURCE_DIR}/Client/src
-)
+    )
 
 target_link_libraries(Ecflow INTERFACE
     ${ECFLOW_BUILD_DIR}/Client/liblibclient.a

@@ -8,15 +8,15 @@ target_sources(ecflow_grpc PRIVATE
 
 target_include_directories(ecflow_grpc
     PRIVATE
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/ecflow_client>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/ecflow_client>
     INTERFACE
-        $<INSTALL_INTERFACE:include>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-)
+    $<INSTALL_INTERFACE:include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    )
 
 target_link_libraries(ecflow_grpc
     PUBLIC
-        gRPC::grpc++)
+    gRPC::grpc++)
 
 add_library(EcflowClient::ecflow_grpc ALIAS ecflow_grpc)
 

@@ -8,8 +8,8 @@ target_sources(ecflow_grpc_server PRIVATE
 
 target_link_libraries(ecflow_grpc_server
     PRIVATE
-        ecflow_grpc
-        ecflow_util
-        EcflowClient::vendor
-        Boost::boost
+    ecflow_grpc
+    ecflow_util
+    EcflowClient::vendor
+    Boost::boost
     )

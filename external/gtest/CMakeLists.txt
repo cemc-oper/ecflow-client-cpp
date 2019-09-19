@@ -6,4 +6,4 @@ if (GTest_FOUND)
         GTest::Main
         PROPERTIES IMPORTED_GLOBAL TRUE
     )
-endif()
+endif ()

@@ -26,5 +26,5 @@ if (Boost_FOUND)
         Boost::regex
         PROPERTIES IMPORTED_GLOBAL TRUE
     )
-endif()
+endif ()
 

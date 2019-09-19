@@ -6,7 +6,7 @@
 #include <grpcpp/grpcpp.h>
 #include <iostream>
 
-int main(int argc, char** argv){
+int main(int argc, char **argv) {
     CLI::App app{"A gRPC client for ecflow"};
 
     std::string rpc_target;
@@ -31,7 +31,7 @@ int main(int argc, char** argv){
     auto stub_ = ecflow_client::EcflowClientService::NewStub(
         grpc::CreateCustomChannel(
             rpc_target,
-            grpc::InsecureChannelCredentials(),args));
+            grpc::InsecureChannelCredentials(), args));
 
     ecflow_client::NodeRequest request;
     request.set_host(host);
@@ -48,16 +48,16 @@ int main(int argc, char** argv){
     grpc::Status status = stub_->CollectNode(&context, request, &response);
     spdlog::info("[{0}/{1}] get node {2}...done", owner, repo, path);
 
-    if(status.ok()){
-        if(response.response_status().has_error()){
+    if (status.ok()) {
+        if (response.response_status().has_error()) {
             spdlog::warn("[{0}/{1}] get records...failed: {2}", owner, repo, response.response_status().error_string());
         } else {
             const auto &node_json_string = response.node();
             auto node_json = nlohmann::json::parse(node_json_string);
-            std::cout<<node_json.dump(2)<<std::endl;
+            std::cout << node_json.dump(2) << std::endl;
         }
     } else {
-        std::cout<<status.error_code()<<": "<<status.error_message()<<std::endl;
+        std::cout << status.error_code() << ": " << status.error_message() << std::endl;
     }
 
     return 0;

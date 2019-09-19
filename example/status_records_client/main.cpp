@@ -5,7 +5,7 @@
 #include <grpcpp/grpcpp.h>
 #include <iostream>
 
-int main(int argc, char** argv){
+int main(int argc, char **argv) {
     CLI::App app{"A gRPC client for ecflow"};
 
     std::string rpc_target;
@@ -28,7 +28,7 @@ int main(int argc, char** argv){
     auto stub_ = ecflow_client::EcflowClientService::NewStub(
         grpc::CreateCustomChannel(
             rpc_target,
-            grpc::InsecureChannelCredentials(),args));
+            grpc::InsecureChannelCredentials(), args));
 
     ecflow_client::StatusRequest request;
     request.set_host(host);
@@ -44,8 +44,8 @@ int main(int argc, char** argv){
     grpc::Status status = stub_->CollectStatusRecords(&context, request, &response);
     spdlog::info("[{0}/{1}] get records...done", owner, repo);
 
-    if(status.ok()){
-        if(response.response_status().has_error()){
+    if (status.ok()) {
+        if (response.response_status().has_error()) {
             spdlog::warn("[{0}/{1}] get records...failed: {2}", owner, repo, response.response_status().error_string());
         } else {
 //            const auto &status_map = response.status_map();
@@ -54,7 +54,7 @@ int main(int argc, char** argv){
 //            }
         }
     } else {
-        std::cout<<status.error_code()<<": "<<status.error_message()<<std::endl;
+        std::cout << status.error_code() << ": " << status.error_message() << std::endl;
     }
 
     return 0;

@@ -7,5 +7,5 @@ target_sources(status_records_client PRIVATE
 
 target_link_libraries(status_records_client
     PRIVATE
-        EcflowClient::ecflow_grpc
-        EcflowClient::vendor)
+    EcflowClient::ecflow_grpc
+    EcflowClient::vendor)

@@ -17,7 +17,7 @@ void RunServer(const std::string &server_address) {
     server->Wait();
 }
 
-int main(int argc, char** argv){
+int main(int argc, char **argv) {
     CLI::App app{"A gRPC server for ecflow"};
 
     std::string rpc_target;

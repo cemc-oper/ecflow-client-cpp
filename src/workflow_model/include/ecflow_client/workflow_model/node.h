@@ -8,23 +8,24 @@
 
 namespace WorkflowModel {
 
-class Node: public std::enable_shared_from_this<Node>{
+class Node : public std::enable_shared_from_this<Node> {
 public:
     Node() = default;
+
     Node(const std::string &name,
-        NodeStatus status = NodeStatus::unknown);
+         NodeStatus status = NodeStatus::unknown);
 
-    virtual ~Node(){}
+    virtual ~Node() {}
 
-    void setParent(std::shared_ptr<Node> parent){
+    void setParent(std::shared_ptr<Node> parent) {
         parent_ = parent;
     }
 
-    std::shared_ptr<Node> parent() const{
+    std::shared_ptr<Node> parent() const {
         return parent_;
     }
 
-    void setName(const std::string &name){
+    void setName(const std::string &name) {
         name_ = name;
     }
 
@@ -32,17 +33,17 @@ public:
         return name_;
     }
 
-    void setStatus(NodeStatus status){
+    void setStatus(NodeStatus status) {
         status_ = status;
     }
 
-    NodeStatus status(){
+    NodeStatus status() {
         return status_;
     }
 
     void addChild(std::shared_ptr<Node> &node);
 
-    std::vector<std::shared_ptr<Node>> children(){
+    std::vector<std::shared_ptr<Node>> children() {
         return children_;
     }
 

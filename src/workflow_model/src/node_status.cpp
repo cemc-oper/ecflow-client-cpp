@@ -1,6 +1,6 @@
 #include <ecflow_client/workflow_model/node_status.h>
 
-namespace WorkflowModel{
+namespace WorkflowModel {
 NodeStatus getNodeStatus(const std::string &status) {
     if (status == "suspended" || status == "sus") {
         return NodeStatus::suspended;
@@ -36,7 +36,7 @@ NodeStatus getNodeStatus(const std::string &status) {
     return NodeStatus::unknown;
 }
 
-std::string nodeStatusToString(NodeStatus status){
+std::string nodeStatusToString(NodeStatus status) {
     if (status == NodeStatus::suspended) {
         return "suspended";
     }
@@ -59,7 +59,7 @@ std::string nodeStatusToString(NodeStatus status){
         return "SHUTDOWN";
     }
     if (status == NodeStatus::halted) {
-        return "HALTED" ;
+        return "HALTED";
     }
     if (status == NodeStatus::running) {
         return "RUNNING";

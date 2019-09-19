@@ -20,10 +20,10 @@ EcflowClientServiceImpl::EcflowClientServiceImpl() {
     response->set_repo(request->repo());
 
     spdlog::info("[{0}/{1}] getting status from server...{2}:{3}",
-        request->owner(), request->repo(), request->host(), request->port());
+                 request->owner(), request->repo(), request->host(), request->port());
     EcflowUtil::EcflowClient client{request->host(), request->port()};
     auto ret = client.sync();
-    if(ret != 0){
+    if (ret != 0) {
         response->mutable_response_status()->set_has_error(true);
         response->mutable_response_status()->set_error_string(client.errorMessage());
         return grpc::Status::OK;
@@ -34,7 +34,7 @@ EcflowClientServiceImpl::EcflowClientServiceImpl() {
 
     auto status_map = response->mutable_status_map();
 
-    for(auto & record: records){
+    for (auto &record: records) {
         (*status_map)[record.path_] = record.status_;
     }
 
@@ -59,7 +59,7 @@ EcflowClientServiceImpl::CollectStatus(
     EcflowUtil::EcflowClient client{request->host(), request->port()};
 
     auto ret = client.sync();
-    if(ret != 0){
+    if (ret != 0) {
         response->mutable_response_status()->set_has_error(true);
         response->mutable_response_status()->set_error_string(client.errorMessage());
         return grpc::Status::OK;
@@ -77,37 +77,37 @@ EcflowClientServiceImpl::CollectStatus(
 ::grpc::Status
 EcflowClientServiceImpl::CollectNode(
     ::grpc::ServerContext *context, const
-    ::ecflow_client::NodeRequest *request,
+::ecflow_client::NodeRequest *request,
     ::ecflow_client::NodeResponse *response) {
 
     spdlog::info("[{0}/{1}] receive node request [{2}:{3}]...",
-        request->owner(), request->repo(), request->host(), request->port());
+                 request->owner(), request->repo(), request->host(), request->port());
 
     response->set_owner(request->owner());
     response->set_repo(request->repo());
 
     spdlog::info("[{0}/{1}] getting node from server [{2}]...",
-        request->owner(), request->repo(), request->path());
+                 request->owner(), request->repo(), request->path());
 
     EcflowUtil::EcflowClient client{request->host(), request->port()};
 
     auto ret = client.sync();
-    if(ret != 0){
+    if (ret != 0) {
         response->mutable_response_status()->set_has_error(true);
         response->mutable_response_status()->set_error_string(client.errorMessage());
         return grpc::Status::OK;
     }
 
     auto node = client.getWorkflowNode(request->path());
-    if(!node){
+    if (!node) {
         response->mutable_response_status()->set_has_error(true);
         response->mutable_response_status()->set_error_string("node path doesn't exist.");
         spdlog::info("[{0}/{1}] getting node from server [{2}]...failed",
-            request->owner(), request->repo(), request->path());
+                     request->owner(), request->repo(), request->path());
         return grpc::Status::OK;
     }
     spdlog::info("[{0}/{1}] getting node from server [{2}]...done",
-        request->owner(), request->repo(), request->path());
+                 request->owner(), request->repo(), request->path());
 
     response->set_node(node->toJson().dump());
 

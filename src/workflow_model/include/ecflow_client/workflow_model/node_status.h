@@ -4,7 +4,7 @@
 
 namespace WorkflowModel {
 
-enum class NodeStatus{
+enum class NodeStatus {
     // node
     unknown = 0,
     suspended,
@@ -21,6 +21,7 @@ enum class NodeStatus{
 };
 
 NodeStatus getNodeStatus(const std::string &status);
+
 std::string nodeStatusToString(NodeStatus status);
 
 }
