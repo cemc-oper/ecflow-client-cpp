@@ -17,7 +17,7 @@ add_subdirectory(src)
 add_subdirectory(vendor)
 add_subdirectory(example)
 
-install(TARGETS workflow_model ecflow_util ecflow_grpc_server vendor Ecflow
+install(TARGETS workflow_model ecflow_util ecflow_util_standalone ecflow_grpc_server vendor Ecflow
     EXPORT EcflowClientCppTargets
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
