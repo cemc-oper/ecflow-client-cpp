@@ -16,7 +16,7 @@ target_include_directories(ecflow_util_standalone
     )
 
 target_link_libraries(ecflow_util_standalone
-    PRIVATE
+    PUBLIC
     Ecflow::Ecflow
     Boost::system
     Boost::filesystem
