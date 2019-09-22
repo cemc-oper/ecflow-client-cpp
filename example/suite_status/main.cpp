@@ -1,5 +1,5 @@
 #include <iostream>
-#include <ecflow_client/ecflow_client_standalone.h>
+#include <ecflow_client/ecflow_client.h>
 
 int main(int argc, char *argv[]) {
     EcflowUtil::EcflowClient client{"10.40.143.18", "31071"};

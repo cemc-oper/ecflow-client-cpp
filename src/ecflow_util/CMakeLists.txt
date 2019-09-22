@@ -7,7 +7,7 @@ endif ()
 add_library(ecflow_util STATIC)
 
 target_sources(ecflow_util PRIVATE
-    src/ecflow_client_standalone.cpp)
+    src/ecflow_client.cpp)
 
 target_include_directories(ecflow_util
     PUBLIC
