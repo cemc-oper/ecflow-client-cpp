@@ -1,7 +1,8 @@
+#include "watch.h"
 #include <spdlog/spdlog.h>
 #include <CLIUtils/CLI11.hpp>
+#include <future>
 
-#include "watch.h"
 
 int main(int argc, char **argv) {
     CLI::App app{"ecflow_watchman"};
@@ -27,14 +28,15 @@ int main(int argc, char **argv) {
 
     if(watch_command->parsed()) {
         WatchCommandOptions options{
-            owner,
-            repo,
-            ecflow_host,
-            ecflow_port,
-            redis_host,
-            redis_port
+                owner,
+                repo,
+                ecflow_host,
+                ecflow_port,
+                redis_host,
+                redis_port
         };
-        runWatchCommand(options);
+        auto future = std::async(std::launch::async, runWatchCommand, options);
+        future.get();
     }
 
     return 0;
