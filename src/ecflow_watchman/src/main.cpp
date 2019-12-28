@@ -1,4 +1,5 @@
 #include "watch.h"
+#include "watch_all.h"
 #include <spdlog/spdlog.h>
 #include <CLIUtils/CLI11.hpp>
 #include <future>
@@ -8,7 +9,6 @@ int main(int argc, char **argv) {
     CLI::App app{"ecflow_watchman"};
 
     CLI::App* watch_command = app.add_subcommand("watch", "watch an ecflow server");
-    app.require_subcommand();
 
     std::string owner;
     std::string repo;
@@ -24,6 +24,11 @@ int main(int argc, char **argv) {
     watch_command->add_option("--redis-host", redis_host, "redis host")->required();
     watch_command->add_option("--redis-port", redis_port, "redis port")->required();
 
+    CLI::App* watch_all_command = app.add_subcommand("watch-all", "watch several ecflow servers");
+    std::string config_file_path;
+    watch_all_command->add_option("--config-file", config_file_path, "config file path")->required();
+
+    app.require_subcommand();
     CLI11_PARSE(app, argc, argv)
 
     if(watch_command->parsed()) {
@@ -37,6 +42,11 @@ int main(int argc, char **argv) {
         };
         auto future = std::async(std::launch::async, runWatchCommand, options);
         future.get();
+    } else if(watch_all_command->parsed()){
+        WatchAllOptions options{
+            config_file_path
+        };
+        runWatchAllCommand(options);
     }
 
     return 0;

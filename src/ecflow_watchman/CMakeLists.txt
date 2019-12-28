@@ -6,6 +6,8 @@ find_library(HIREDIS_LIB hiredis)
 find_path(REDIS_PLUS_PLUS_HEADER sw)
 find_library(REDIS_PLUS_PLUS_LIB redis++)
 
+find_package(yaml-cpp CONFIG REQUIRED)
+
 message(STATUS "HIREDIS_HEADER ${HIREDIS_HEADER}")
 message(STATUS "HIREDIS_LIB ${HIREDIS_LIB}")
 message(STATUS "REDIS_PLUS_PLUS_HEADER ${REDIS_PLUS_PLUS_HEADER}")
@@ -20,7 +22,8 @@ target_include_directories(ecflow_watchman
 
 target_sources(ecflow_watchman PRIVATE
     src/main.cpp
-    src/watch.cpp)
+    src/watch.cpp
+    src/watch_all.cpp)
 
 target_link_libraries(ecflow_watchman
     PRIVATE
@@ -29,4 +32,5 @@ target_link_libraries(ecflow_watchman
     Boost::boost
     ${HIREDIS_LIB}
     ${REDIS_PLUS_PLUS_LIB}
+    yaml-cpp
     )
