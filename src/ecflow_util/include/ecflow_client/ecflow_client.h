@@ -3,6 +3,8 @@
 #include "ecflow_client/workflow_model/bunch.h"
 #include "ecflow_client/workflow_model/workflow_node.h"
 
+#include <chrono>
+
 namespace EcflowUtil {
 
 class EcflowClientPrivate;
@@ -23,6 +25,10 @@ public:
         return status_records_;
     }
 
+    std::chrono::system_clock::time_point collectedTime(){
+        return collected_time_;
+    }
+
     std::shared_ptr<WorkflowModel::WorkflowNode> getWorkflowNode(const std::string &node_path);
 
     std::string errorMessage();
@@ -34,6 +40,7 @@ private:
     std::string port_;
 
     std::vector<WorkflowModel::NodeStatusRecord> status_records_;
+    std::chrono::system_clock::time_point collected_time_;
 };
 
 }

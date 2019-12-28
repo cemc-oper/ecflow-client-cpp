@@ -123,6 +123,7 @@ int EcflowClient::sync() {
         return ret;
     }
     status_records_ = p_->collectStatus();
+    collected_time_ = std::chrono::system_clock::now();
     return 0;
 }
 
