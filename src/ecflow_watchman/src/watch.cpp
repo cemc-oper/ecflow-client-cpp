@@ -26,6 +26,7 @@ void runWatchCommand(const WatchCommandOptions &options) {
     const auto key = fmt::format("{}/{}/status", options.owner, options.repo);
 
     while(true) {
+        std::this_thread::sleep_for(10s);
         EcflowUtil::EcflowClient client{options.ecflow_host, options.ecflow_port};
         client.sync();
         auto records = client.statusRecords();
@@ -50,8 +51,6 @@ void runWatchCommand(const WatchCommandOptions &options) {
         spdlog::info("save nodes...");
         redis_client.set(key, value);
         spdlog::info("save nodes...done");
-
-        std::this_thread::sleep_for(10s);
     }
 }
 
