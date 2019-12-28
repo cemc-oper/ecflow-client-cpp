@@ -6,7 +6,11 @@
 
 #include <thread>
 
-void runWatchCommand(const std::string &ecflow_host, const std::string &ecflow_port) {
+void runWatchCommand(
+        const std::string &ecflow_host,
+        const std::string &ecflow_port,
+        const std::string &redis_host,
+        int redis_port) {
     using namespace std::chrono_literals;
     while(true) {
         EcflowUtil::EcflowClient client{ecflow_host, ecflow_port};
