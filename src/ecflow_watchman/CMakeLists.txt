@@ -3,7 +3,8 @@ project(ecflow_watchman)
 add_executable(ecflow_watchman)
 
 target_sources(ecflow_watchman PRIVATE
-    src/main.cpp)
+    src/main.cpp
+    src/watch.cpp)
 
 target_link_libraries(ecflow_watchman
     PRIVATE
