@@ -114,6 +114,7 @@ EcflowClient::EcflowClient(const std::string &host, const std::string &port) :
 
 EcflowClient::~EcflowClient() {
     delete p_;
+    status_records_.clear();
 }
 
 int EcflowClient::sync() {
@@ -122,10 +123,6 @@ int EcflowClient::sync() {
         return ret;
     }
     status_records_ = p_->collectStatus();
-    bunch_ = std::make_shared<WorkflowModel::Bunch>();
-    for (auto &record: status_records_) {
-        bunch_->addNodeStatus(record);
-    }
     return 0;
 }
 
@@ -135,6 +132,14 @@ std::shared_ptr<WorkflowModel::WorkflowNode> EcflowClient::getWorkflowNode(const
 
 std::string EcflowClient::errorMessage() {
     return p_->error_message_;
+}
+
+std::shared_ptr<WorkflowModel::Bunch> EcflowClient::bunch() {
+    auto bunch = std::make_shared<WorkflowModel::Bunch>();
+    for (auto &record: status_records_) {
+        bunch->addNodeStatus(record);
+    }
+    return bunch;
 }
 
 

@@ -17,9 +17,7 @@ public:
 
     int sync();
 
-    std::shared_ptr<WorkflowModel::Bunch> bunch() {
-        return bunch_;
-    }
+    std::shared_ptr<WorkflowModel::Bunch> bunch();
 
     std::vector<WorkflowModel::NodeStatusRecord> statusRecords() {
         return status_records_;
@@ -36,7 +34,6 @@ private:
     std::string port_;
 
     std::vector<WorkflowModel::NodeStatusRecord> status_records_;
-    std::shared_ptr<WorkflowModel::Bunch> bunch_;
 };
 
 }
