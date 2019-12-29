@@ -9,6 +9,8 @@
 
 #include <thread>
 
+namespace ecflow_watchman {
+
 void runWatchCommand(const WatchCommandOptions &options) {
     using namespace std::chrono_literals;
     using namespace sw::redis;
@@ -25,7 +27,7 @@ void runWatchCommand(const WatchCommandOptions &options) {
 
     const auto key = fmt::format("{}/{}/status", options.owner, options.repo);
 
-    while(true) {
+    while (true) {
         std::this_thread::sleep_for(10s);
         EcflowUtil::EcflowClient client{options.ecflow_host, options.ecflow_port};
         client.sync();
@@ -39,7 +41,7 @@ void runWatchCommand(const WatchCommandOptions &options) {
                 std::chrono::time_point_cast<std::chrono::milliseconds>(collected_time));
 
         value_json["status_records"] = nlohmann::json::array();
-        for(const auto& record: records) {
+        for (const auto &record: records) {
             nlohmann::json record_json;
             record_json["path"] = record.path_;
             record_json["status"] = record.status_;
@@ -53,5 +55,4 @@ void runWatchCommand(const WatchCommandOptions &options) {
         spdlog::info("save nodes...done");
     }
 }
-
-
+} // namespace ecflow_watchman

@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 
-struct WatchCommandOptions{
+namespace ecflow_watchman {
+struct WatchCommandOptions {
     std::string owner;
     std::string repo;
     std::string ecflow_host;
@@ -11,3 +12,4 @@ struct WatchCommandOptions{
 };
 
 void runWatchCommand(const WatchCommandOptions &options);
+} // namespace ecflow_watchman

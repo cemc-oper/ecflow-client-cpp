@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
     CLI11_PARSE(app, argc, argv)
 
     if(watch_command->parsed()) {
-        WatchCommandOptions options{
+        ecflow_watchman::WatchCommandOptions options{
                 owner,
                 repo,
                 ecflow_host,
@@ -40,13 +40,13 @@ int main(int argc, char **argv) {
                 redis_host,
                 redis_port
         };
-        auto future = std::async(std::launch::async, runWatchCommand, options);
+        auto future = std::async(std::launch::async, ecflow_watchman::runWatchCommand, options);
         future.get();
     } else if(watch_all_command->parsed()){
-        WatchAllOptions options{
+        ecflow_watchman::WatchAllOptions options{
             config_file_path
         };
-        runWatchAllCommand(options);
+        ecflow_watchman::runWatchAllCommand(options);
     }
 
     return 0;
