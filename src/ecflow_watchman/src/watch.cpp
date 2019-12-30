@@ -1,29 +1,26 @@
 #include "watch.h"
+#include "storer.h"
 
 #include <ecflow_client/ecflow_client.h>
 #include <spdlog/spdlog.h>
 #include <nlohmann/json.hpp>
 #include <date/date.h>
 
-#include <sw/redis++/redis++.h>
-
 #include <thread>
+
+using namespace std::chrono_literals;
 
 namespace ecflow_watchman {
 
 void runWatchCommand(const WatchCommandOptions &options) {
-    using namespace std::chrono_literals;
-    using namespace sw::redis;
+    RedisStorer storer{
+        options.redis_host,
+        options.redis_port,
+        "",
+        0,
+    };
 
-    ConnectionOptions connection_options;
-    connection_options.host = options.redis_host;
-    connection_options.port = options.redis_port;
-//    connection_options.password = "";   // Optional. No password by default.
-//    connection_options.db = 0;
-
-    connection_options.socket_timeout = std::chrono::milliseconds(200);
-
-    Redis redis_client(connection_options);
+    storer.create();
 
     const auto key = fmt::format("{}/{}/status", options.owner, options.repo);
 
@@ -51,7 +48,7 @@ void runWatchCommand(const WatchCommandOptions &options) {
         const auto value = value_json.dump();
 
         spdlog::info("save nodes...");
-        redis_client.set(key, value);
+        storer.save(key, value);
         spdlog::info("save nodes...done");
     }
 }
