@@ -1,10 +1,10 @@
 project(ecflow_watchman)
 
 find_path(HIREDIS_HEADER hiredis)
-find_library(HIREDIS_LIB hiredis)
+find_library(HIREDIS_LIB NAMES libhiredis.a)
 
 find_path(REDIS_PLUS_PLUS_HEADER sw)
-find_library(REDIS_PLUS_PLUS_LIB redis++)
+find_library(REDIS_PLUS_PLUS_LIB NAMES libredis++.a)
 
 find_package(yaml-cpp CONFIG REQUIRED)
 
