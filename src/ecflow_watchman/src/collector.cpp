@@ -21,7 +21,7 @@ std::string EcflowCollector::getStatusJsonString() {
     client.sync();
     auto records = client.statusRecords();
     auto collected_time = client.collectedTime();
-    spdlog::info("get nodes...{}", records.size());
+    spdlog::info("[{}/{}] get nodes...{}", owner_, repo_, records.size());
 
     nlohmann::json value_json;
     value_json["collected_time"] = date::format(
