@@ -24,7 +24,8 @@ target_sources(ecflow_watchman PRIVATE
     src/main.cpp
     src/watch.cpp
     src/watch_all.cpp
-    src/storer.cpp)
+    src/storer.cpp
+    src/collector.cpp)
 
 target_link_libraries(ecflow_watchman
     PRIVATE
