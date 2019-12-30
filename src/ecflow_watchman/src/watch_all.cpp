@@ -23,7 +23,7 @@ void runWatchAllCommand(const WatchAllOptions &options) {
         return;
     }
 
-    const auto redis_host = redis_url.substr(0, pos-1);
+    const auto redis_host = redis_url.substr(0, pos);
     const auto redis_port_string = redis_url.substr(pos+1);
     int redis_port = std::stoi(redis_port_string);
 
