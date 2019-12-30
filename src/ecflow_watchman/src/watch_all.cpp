@@ -26,6 +26,14 @@ void runWatchAllCommand(const WatchAllOptions &options) {
     const auto redis_host = redis_url.substr(0, pos);
     const auto redis_port_string = redis_url.substr(pos+1);
     int redis_port = std::stoi(redis_port_string);
+    RedisStorer storer{
+            redis_host,
+            redis_port,
+            "",
+            0,
+    };
+
+    storer.create();
 
     const auto tasks = config["scrape_configs"];
 
@@ -33,16 +41,7 @@ void runWatchAllCommand(const WatchAllOptions &options) {
 
     for (const auto &task_config: tasks) {
         spdlog::info("load new job: {}", task_config["job_name"].as<std::string>());
-        threads.push_back(std::async(std::launch::async, [=](){
-            RedisStorer storer{
-                    redis_host,
-                    redis_port,
-                    "",
-                    0,
-            };
-
-            storer.create();
-
+        threads.push_back(std::async(std::launch::async, [&storer, &task_config](){
             const auto owner = task_config["owner"].as<std::string>();
             const auto repo = task_config["repo"].as<std::string>();
 
