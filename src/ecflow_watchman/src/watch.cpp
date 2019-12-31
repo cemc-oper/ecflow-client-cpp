@@ -29,13 +29,29 @@ void runWatchCommand(const WatchCommandOptions &options) {
 
     const auto key = fmt::format("{}/{}/status", options.owner, options.repo);
 
-    while (true) {
-        std::this_thread::sleep_for(10s);
-        auto value = collector.getStatusJsonString();
+    // add a test
+    if (options.max_count != -1) {
+        int i = 0;
+        while (i<options.max_count) {
+            std::this_thread::sleep_for(10s);
+            auto value = collector.getStatusJsonString();
 
-        spdlog::info("save nodes...");
-        storer.save(key, value);
-        spdlog::info("save nodes...done");
+            spdlog::info("save nodes...");
+            storer.save(key, value);
+            spdlog::info("save nodes...done");
+            i++;
+        }
+        exit(-1);
+    } else {
+        while (true) {
+            std::this_thread::sleep_for(10s);
+            auto value = collector.getStatusJsonString();
+
+            spdlog::info("save nodes...");
+            storer.save(key, value);
+            spdlog::info("save nodes...done");
+        }
     }
+
 }
 } // namespace ecflow_watchman

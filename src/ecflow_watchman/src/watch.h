@@ -9,6 +9,7 @@ struct WatchCommandOptions {
     std::string ecflow_port;
     std::string redis_host;
     int redis_port;
+    int max_count;
 };
 
 void runWatchCommand(const WatchCommandOptions &options);
