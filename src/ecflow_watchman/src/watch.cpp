@@ -28,6 +28,10 @@ void runWatchCommand(const WatchCommandOptions &options) {
     };
 
     const auto key = fmt::format("{}/{}/status", options.owner, options.repo);
+    spdlog::info("[{owner}/{repo}] redis key: {key}",
+                 fmt::arg("owner", options.owner),
+                 fmt::arg("repo", options.repo),
+                 fmt::arg("key", key));
 
     // add a test
     if (options.max_count != -1) {
@@ -36,9 +40,13 @@ void runWatchCommand(const WatchCommandOptions &options) {
             std::this_thread::sleep_for(10s);
             auto value = collector.getStatusJsonString();
 
-            spdlog::info("save nodes...");
+            spdlog::info("[{owner}/{repo}] save nodes...",
+                    fmt::arg("owner", options.owner),
+                    fmt::arg("repo", options.repo));
             storer.save(key, value);
-            spdlog::info("save nodes...done");
+            spdlog::info("[{owner}/{repo}] save nodes...done",
+                    fmt::arg("owner", options.owner),
+                    fmt::arg("repo", options.repo));
             i++;
         }
         exit(-1);
@@ -47,9 +55,13 @@ void runWatchCommand(const WatchCommandOptions &options) {
             std::this_thread::sleep_for(10s);
             auto value = collector.getStatusJsonString();
 
-            spdlog::info("save nodes...");
+            spdlog::info("[{owner}/{repo}] save nodes...",
+                    fmt::arg("owner", options.owner),
+                    fmt::arg("repo", options.repo));
             storer.save(key, value);
-            spdlog::info("save nodes...done");
+            spdlog::info("[{owner}/{repo}] save nodes...done"),
+                    fmt::arg("owner", options.owner),
+                    fmt::arg("repo", options.repo));
         }
     }
 

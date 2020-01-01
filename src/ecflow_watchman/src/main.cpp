@@ -27,6 +27,7 @@ int main(int argc, char **argv) {
     watch_command->add_option("--max-count", max_count, "max count, for test");
 
     CLI::App* watch_all_command = app.add_subcommand("watch-all", "watch several ecflow servers");
+
     std::string config_file_path;
     watch_all_command->add_option("--config-file", config_file_path, "config file path")->required();
 

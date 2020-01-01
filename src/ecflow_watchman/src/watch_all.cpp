@@ -53,6 +53,10 @@ void runWatchAllCommand(const WatchAllOptions &options) {
             };
 
             const auto key = fmt::format("{}/{}/status", owner, repo);
+            spdlog::info("[{owner}/{repo}] redis key: {key}",
+                    fmt::arg("owner", owner),
+                    fmt::arg("repo", repo),
+                    fmt::arg("key", key));
 
             while (true) {
                 std::this_thread::sleep_for(10s);
