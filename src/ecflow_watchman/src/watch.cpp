@@ -59,9 +59,9 @@ void runWatchCommand(const WatchCommandOptions &options) {
                     fmt::arg("owner", options.owner),
                     fmt::arg("repo", options.repo));
             storer.save(key, value);
-            spdlog::info("[{owner}/{repo}] save nodes...done"),
-                    fmt::arg("owner", options.owner),
-                    fmt::arg("repo", options.repo));
+            spdlog::info("[{owner}/{repo}] save nodes...done",
+                fmt::arg("owner", options.owner),
+                fmt::arg("repo", options.repo));
         }
     }
 
