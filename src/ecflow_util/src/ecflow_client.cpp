@@ -8,7 +8,7 @@ namespace EcflowUtil {
 
 class EcflowClientPrivate {
 public:
-    EcflowClientPrivate(std::string host, std::string port) :
+    EcflowClientPrivate(const std::string &host, const std::string &port) :
         host_{host}, port_{port} {}
 
     int sync() {
