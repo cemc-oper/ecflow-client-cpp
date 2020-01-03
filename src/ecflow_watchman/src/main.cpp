@@ -1,7 +1,7 @@
 #include "watch.h"
 #include "watch_all.h"
 #include <spdlog/spdlog.h>
-#include <CLIUtils/CLI11.hpp>
+#include <CLI/CLI.hpp>
 #include <future>
 
 

@@ -1,7 +1,7 @@
 #include "ecflow_client_service_impl.h"
 
 #include <spdlog/spdlog.h>
-#include <CLIUtils/CLI11.hpp>
+#include <CLI/CLI.hpp>
 
 void RunServer(const std::string &server_address) {
     EcflowClientServiceImpl service;

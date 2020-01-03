@@ -15,4 +15,5 @@ target_link_libraries(ecflow_grpc_server
     EcflowClient::vendor
     Boost::boost
     spdlog::spdlog_header_only
+    CLI11::CLI11
     )

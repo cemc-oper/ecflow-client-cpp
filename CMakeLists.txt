@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(EcflowClientCPP_VERSION 0.0.1)
 
 find_package(spdlog CONFIG REQUIRED)
+find_package(CLI11 CONFIG REQUIRED)
 
 option(ENABLE_TESTS "Enable tests" OFF)
 

@@ -38,4 +38,5 @@ target_link_libraries(ecflow_watchman
     yaml-cpp
     spdlog::spdlog_header_only
     date::date
+    CLI11::CLI11
     )
