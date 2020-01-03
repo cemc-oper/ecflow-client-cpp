@@ -8,6 +8,5 @@ target_sources(node_client PRIVATE
 target_link_libraries(node_client
     PRIVATE
     EcflowClient::ecflow_grpc
-    EcflowClient::vendor
     spdlog::spdlog_header_only
     )

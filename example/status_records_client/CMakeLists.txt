@@ -8,7 +8,6 @@ target_sources(status_records_client PRIVATE
 target_link_libraries(status_records_client
     PRIVATE
     EcflowClient::ecflow_grpc
-    EcflowClient::vendor
     CLI11::CLI11
     spdlog::spdlog_header_only
     )

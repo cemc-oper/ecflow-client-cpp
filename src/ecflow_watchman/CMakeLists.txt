@@ -31,7 +31,6 @@ target_sources(ecflow_watchman PRIVATE
 target_link_libraries(ecflow_watchman
     PRIVATE
     ecflow_util
-    EcflowClient::vendor
     Boost::boost
     ${HIREDIS_LIB}
     ${REDIS_PLUS_PLUS_LIB}

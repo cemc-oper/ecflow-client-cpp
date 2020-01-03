@@ -7,6 +7,7 @@ set(EcflowClientCPP_VERSION 0.0.1)
 
 find_package(spdlog CONFIG REQUIRED)
 find_package(CLI11 CONFIG REQUIRED)
+find_package(nlohmann_json CONFIG REQUIRED)
 
 option(ENABLE_TESTS "Enable tests" OFF)
 
@@ -18,10 +19,9 @@ endif()
 
 add_subdirectory(external)
 add_subdirectory(src)
-add_subdirectory(vendor)
 add_subdirectory(example)
 
-install(TARGETS workflow_model ecflow_util ecflow_util_standalone ecflow_grpc_server vendor Ecflow
+install(TARGETS workflow_model ecflow_util ecflow_util_standalone ecflow_grpc_server Ecflow
     EXPORT EcflowClientCppTargets
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib

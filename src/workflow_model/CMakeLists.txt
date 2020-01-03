@@ -18,7 +18,7 @@ target_include_directories(workflow_model
 target_link_libraries(workflow_model
     PUBLIC
     Boost::boost
-    EcflowClient::vendor
+    nlohmann_json::nlohmann_json
     )
 
 add_library(EclfowClientCPP::workflow_model ALIAS workflow_model)
