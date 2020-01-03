@@ -1,5 +1,5 @@
 #include <ecflow_client/ecflow_client.grpc.pb.h>
-#include <CLIUtils/CLI11.hpp>
+#include <CLI/CLI.hpp>
 #include <spdlog/spdlog.h>
 #include <nlohmann/json.hpp>
 

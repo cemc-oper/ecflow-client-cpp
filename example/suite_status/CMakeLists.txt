@@ -8,4 +8,5 @@ target_sources(example_suite_status PRIVATE
 target_link_libraries(example_suite_status
     PUBLIC
     EclfowClientCPP::ecflow_util
+    CLI11::CLI11
     )
