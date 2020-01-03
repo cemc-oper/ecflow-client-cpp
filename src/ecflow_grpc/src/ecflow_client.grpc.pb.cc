@@ -41,19 +41,27 @@ EcflowClientService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>
 }
 
 void EcflowClientService::Stub::experimental_async::CollectStatusRecords(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusRecordsResponse* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CollectStatusRecords_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CollectStatusRecords_, context, request, response, std::move(f));
 }
 
 void EcflowClientService::Stub::experimental_async::CollectStatusRecords(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusRecordsResponse* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CollectStatusRecords_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CollectStatusRecords_, context, request, response, std::move(f));
+}
+
+void EcflowClientService::Stub::experimental_async::CollectStatusRecords(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusRecordsResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_CollectStatusRecords_, context, request, response, reactor);
+}
+
+void EcflowClientService::Stub::experimental_async::CollectStatusRecords(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusRecordsResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_CollectStatusRecords_, context, request, response, reactor);
 }
 
 ::grpc::ClientAsyncResponseReader< ::ecflow_client::StatusRecordsResponse>* EcflowClientService::Stub::AsyncCollectStatusRecordsRaw(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::StatusRecordsResponse>::Create(channel_.get(), cq, rpcmethod_CollectStatusRecords_, context, request, true);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::StatusRecordsResponse>::Create(channel_.get(), cq, rpcmethod_CollectStatusRecords_, context, request, true);
 }
 
 ::grpc::ClientAsyncResponseReader< ::ecflow_client::StatusRecordsResponse>* EcflowClientService::Stub::PrepareAsyncCollectStatusRecordsRaw(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::StatusRecordsResponse>::Create(channel_.get(), cq, rpcmethod_CollectStatusRecords_, context, request, false);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::StatusRecordsResponse>::Create(channel_.get(), cq, rpcmethod_CollectStatusRecords_, context, request, false);
 }
 
 ::grpc::Status EcflowClientService::Stub::CollectStatus(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::ecflow_client::StatusResponse* response) {
@@ -61,19 +69,27 @@ void EcflowClientService::Stub::experimental_async::CollectStatusRecords(::grpc:
 }
 
 void EcflowClientService::Stub::experimental_async::CollectStatus(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CollectStatus_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CollectStatus_, context, request, response, std::move(f));
 }
 
 void EcflowClientService::Stub::experimental_async::CollectStatus(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusResponse* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CollectStatus_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CollectStatus_, context, request, response, std::move(f));
+}
+
+void EcflowClientService::Stub::experimental_async::CollectStatus(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_CollectStatus_, context, request, response, reactor);
+}
+
+void EcflowClientService::Stub::experimental_async::CollectStatus(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_CollectStatus_, context, request, response, reactor);
 }
 
 ::grpc::ClientAsyncResponseReader< ::ecflow_client::StatusResponse>* EcflowClientService::Stub::AsyncCollectStatusRaw(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::StatusResponse>::Create(channel_.get(), cq, rpcmethod_CollectStatus_, context, request, true);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::StatusResponse>::Create(channel_.get(), cq, rpcmethod_CollectStatus_, context, request, true);
 }
 
 ::grpc::ClientAsyncResponseReader< ::ecflow_client::StatusResponse>* EcflowClientService::Stub::PrepareAsyncCollectStatusRaw(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::StatusResponse>::Create(channel_.get(), cq, rpcmethod_CollectStatus_, context, request, false);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::StatusResponse>::Create(channel_.get(), cq, rpcmethod_CollectStatus_, context, request, false);
 }
 
 ::grpc::Status EcflowClientService::Stub::CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::ecflow_client::NodeResponse* response) {
@@ -81,19 +97,27 @@ void EcflowClientService::Stub::experimental_async::CollectStatus(::grpc::Client
 }
 
 void EcflowClientService::Stub::experimental_async::CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CollectNode_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CollectNode_, context, request, response, std::move(f));
 }
 
 void EcflowClientService::Stub::experimental_async::CollectNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::NodeResponse* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CollectNode_, context, request, response, std::move(f));
+  ::grpc_impl::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_CollectNode_, context, request, response, std::move(f));
+}
+
+void EcflowClientService::Stub::experimental_async::CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_CollectNode_, context, request, response, reactor);
+}
+
+void EcflowClientService::Stub::experimental_async::CollectNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::NodeResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc_impl::internal::ClientCallbackUnaryFactory::Create(stub_->channel_.get(), stub_->rpcmethod_CollectNode_, context, request, response, reactor);
 }
 
 ::grpc::ClientAsyncResponseReader< ::ecflow_client::NodeResponse>* EcflowClientService::Stub::AsyncCollectNodeRaw(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::NodeResponse>::Create(channel_.get(), cq, rpcmethod_CollectNode_, context, request, true);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::NodeResponse>::Create(channel_.get(), cq, rpcmethod_CollectNode_, context, request, true);
 }
 
 ::grpc::ClientAsyncResponseReader< ::ecflow_client::NodeResponse>* EcflowClientService::Stub::PrepareAsyncCollectNodeRaw(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::NodeResponse>::Create(channel_.get(), cq, rpcmethod_CollectNode_, context, request, false);
+  return ::grpc_impl::internal::ClientAsyncResponseReaderFactory< ::ecflow_client::NodeResponse>::Create(channel_.get(), cq, rpcmethod_CollectNode_, context, request, false);
 }
 
 EcflowClientService::Service::Service() {
