@@ -2,6 +2,8 @@ project(ecflow_grpc)
 
 add_library(ecflow_grpc STATIC)
 
+find_package(gRPC CONFIG REQUIRED)
+
 target_sources(ecflow_grpc PRIVATE
     src/ecflow_client.pb.cc
     src/ecflow_client.grpc.pb.cc)

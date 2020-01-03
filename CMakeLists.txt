@@ -5,10 +5,13 @@ set(CMAKE_CXX_STANDARD 14)
 
 set(EcflowClientCPP_VERSION 0.0.1)
 
+find_package(spdlog CONFIG REQUIRED)
+
 option(ENABLE_TESTS "Enable tests" OFF)
 
 if(ENABLE_TESTS)
     message("ENABLE TESTS...")
+#    find_package(GTest CONFIG REQUIRED)
     enable_testing()
 endif()
 
