@@ -37,6 +37,7 @@ target_link_libraries(ecflow_watchman
     ${REDIS_PLUS_PLUS_LIB}
     yaml-cpp
     spdlog::spdlog_header_only
+    fmt::fmt-header-only
     date::date
     CLI11::CLI11
     )
