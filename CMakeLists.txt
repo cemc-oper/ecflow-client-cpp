@@ -12,7 +12,7 @@ option(ENABLE_TESTS "Enable tests" OFF)
 
 if(ENABLE_TESTS)
     message("ENABLE TESTS...")
-#    find_package(GTest CONFIG REQUIRED)
+    find_package(GTest CONFIG REQUIRED)
     enable_testing()
 endif()
 

@@ -13,7 +13,7 @@ target_include_directories(test_workflow_model PRIVATE
 
 target_link_libraries(test_workflow_model PRIVATE
     workflow_model
-    GTest::GTest
-    GTest::Main)
+    GTest::gtest
+    GTest::gtest_main)
 
 add_test(WorkflowModelTest test_workflow_model)
