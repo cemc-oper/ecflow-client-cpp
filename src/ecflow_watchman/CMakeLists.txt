@@ -7,6 +7,7 @@ find_path(REDIS_PLUS_PLUS_HEADER sw)
 find_library(REDIS_PLUS_PLUS_LIB NAMES libredis++.a)
 
 find_package(yaml-cpp CONFIG REQUIRED)
+find_package(date CONFIG REQUIRED)
 
 message(STATUS "HIREDIS_HEADER ${HIREDIS_HEADER}")
 message(STATUS "HIREDIS_LIB ${HIREDIS_LIB}")
@@ -36,4 +37,5 @@ target_link_libraries(ecflow_watchman
     ${REDIS_PLUS_PLUS_LIB}
     yaml-cpp
     spdlog::spdlog_header_only
+    date::date
     )
