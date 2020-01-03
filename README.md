@@ -1,8 +1,11 @@
 # ecflow-client-cpp
 
-A client for ecflow using ecflow's c++ API including a tree-like model for workflow, 
-an ecflow client to get status or node information, 
-and a gRPC server to collect data from ecflow server.
+A client for ecflow using ecflow's c++ API including:
+
+- A tree-like model for workflow
+- An ecflow client to get status or node information
+- A gRPC server to collect data from ecflow server
+- A watcher to watch multiply ecflow servers
 
 ## Requirements
 
@@ -61,7 +64,7 @@ We use [nlohmann/json](https://github.com/nlohmann/json) to generate JSON string
 
 `ecflow_watchman` saves ecflow status into redis server.
 
-### Installation
+## Installation
 
 Use CMake to build the project from source code.
 
