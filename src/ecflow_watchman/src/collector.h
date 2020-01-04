@@ -6,10 +6,10 @@ namespace ecflow_watchman {
 class EcflowCollector {
 public:
     EcflowCollector(
-            const std::string &owner,
-            const std::string &repo,
-            const std::string &ecflow_host,
-            const std::string &ecflow_port);
+            std::string owner,
+            std::string repo,
+            std::string ecflow_host,
+            std::string ecflow_port);
 
     std::string getStatusJsonString();
 

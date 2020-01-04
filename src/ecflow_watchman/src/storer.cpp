@@ -9,10 +9,10 @@ using namespace std::chrono_literals;
 namespace ecflow_watchman {
 
 RedisStorer::RedisStorer(
-        const std::string &redis_host, int redis_port, const std::string &password, int db):
-        redis_host_{redis_host},
+        std::string redis_host, int redis_port, std::string password, int db):
+        redis_host_{std::move(redis_host)},
         redis_port_{redis_port},
-        password_{password},
+        password_{std::move(password)},
         db_{db} {
 }
 

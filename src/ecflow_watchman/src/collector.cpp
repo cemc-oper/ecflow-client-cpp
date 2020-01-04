@@ -8,12 +8,12 @@
 namespace ecflow_watchman{
 
 EcflowCollector::EcflowCollector(
-        const std::string &owner, const std::string &repo, const std::string &ecflow_host,
-        const std::string &ecflow_port):
-        owner_{owner},
-        repo_{repo},
-        ecflow_host_{ecflow_host},
-        ecflow_port_{ecflow_port}{
+        std::string owner, std::string repo, std::string ecflow_host,
+        std::string ecflow_port):
+        owner_{std::move(owner)},
+        repo_{std::move(repo)},
+        ecflow_host_{std::move(ecflow_host)},
+        ecflow_port_{std::move(ecflow_port)}{
 }
 
 std::string EcflowCollector::getStatusJsonString() {

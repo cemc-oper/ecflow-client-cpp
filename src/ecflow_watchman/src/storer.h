@@ -12,7 +12,7 @@ namespace ecflow_watchman {
 
 class RedisStorer final {
 public:
-    RedisStorer(const std::string &redis_host, int redis_port, const std::string &password="", int db=0);
+    RedisStorer(std::string redis_host, int redis_port, std::string password="", int db=0);
     ~RedisStorer();
 
     void create();
