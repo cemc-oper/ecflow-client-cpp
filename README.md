@@ -77,6 +77,8 @@ Some variables should be set to help find external libraries.
 
 ## Getting Started
 
+### ecflow gRPC server
+
 Use binary program `ecflow_grpc_server` to run a gRPC server.
 
 ```bash
@@ -87,9 +89,21 @@ gRPC client will get ecFlow status and node information from this server.
 
 See `example` directory for more examples.
 
+### ecflow_watchman
+
+Run `ecflow_watchman all` to watch several ecFlow servers defined in a config file.
+
+```bash
+ecflow_watchman watch-all --config-file /path/to/config/file
+```
+
+The statuses of all ecFlow servers are stored into a Redis server.
+
+For an ecflow server with `owner: nwp_xp` and `repo: nwpc_op`, the status will be stored using key `nwp_xp/nwpc_op/stats`.
+
 ## License
 
-Copyright &copy; 2019, Perilla Roc.
+Copyright &copy; 2019-2020, Perilla Roc.
 
 `ecflow-client-cpp` is licensed under [GPL v3.0](LICENSE.md)
 
