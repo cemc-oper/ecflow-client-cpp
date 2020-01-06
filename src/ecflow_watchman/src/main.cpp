@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
     std::string ecflow_host;
     std::string ecflow_port;
     std::string redis_host;
-    int redis_port;
+    int redis_port = 6379;
     int max_count = -1;
 
     watch_command->add_option("--owner", owner, "owner")->required();
