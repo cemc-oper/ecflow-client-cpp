@@ -1,3 +1,3 @@
 add_subdirectory(suite_status)
-add_subdirectory(status_records_client)
-add_subdirectory(node_client)
+#add_subdirectory(status_records_client)
+#add_subdirectory(node_client)
