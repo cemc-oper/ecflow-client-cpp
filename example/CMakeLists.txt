@@ -1,3 +1,6 @@
 add_subdirectory(suite_status)
-#add_subdirectory(status_records_client)
-#add_subdirectory(node_client)
+
+if(ENABLE_SERVER)
+    add_subdirectory(status_records_client)
+    add_subdirectory(node_client)
+endif()
