@@ -42,7 +42,7 @@ void runWatchAllCommand(const WatchAllOptions &options) {
 
     for (const auto &task_config: tasks) {
         spdlog::info("load new job: {}", task_config["job_name"].as<std::string>());
-        threads.push_back(std::async(std::launch::async, [&storer, &task_config](){
+        threads.push_back(std::async(std::launch::async, [&storer, task_config](){
             const auto owner = task_config["owner"].as<std::string>();
             const auto repo = task_config["repo"].as<std::string>();
 
