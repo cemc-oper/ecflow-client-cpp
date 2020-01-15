@@ -75,19 +75,14 @@ Some variables should be set to help find external libraries.
 - `BOOST_ROOT`: boost root directory.
 - `Boost_NO_SYSTEM_PATHS=on`: disable system boost search because ecFlow uses a specific version of Boost.
 
+Some variables control which components to build.
+
+- `ENABLE_SERVER`: build grpc server and examples.
+- `ENABLE_TESTS`: build all tests.
+
 ## Getting Started
 
-### ecflow gRPC server
-
-Use binary program `ecflow_grpc_server` to run a gRPC server.
-
-```bash
-./ecflow_grpc_server --rpc-target="[::]:31181"
-```
-
-gRPC client will get ecFlow status and node information from this server.
-
-See `example` directory for more examples.
+There are several command line tools.
 
 ### ecflow_watchman
 
@@ -100,6 +95,19 @@ ecflow_watchman watch-all --config-file /path/to/config/file
 The statuses of all ecFlow servers are stored into a Redis server.
 
 For an ecflow server with `owner: nwp_xp` and `repo: nwpc_op`, the status will be stored using key `nwp_xp/nwpc_op/stats`.
+
+
+### ecflow gRPC server
+
+Use binary program `ecflow_grpc_server` to run a gRPC server.
+
+```bash
+./ecflow_grpc_server --rpc-target="[::]:31181"
+```
+
+gRPC client will get ecFlow status and node information from this server.
+
+See `example` directory for more examples.
 
 ## License
 
