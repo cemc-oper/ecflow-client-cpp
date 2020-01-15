@@ -11,6 +11,7 @@ using namespace std::chrono_literals;
 namespace ecflow_watchman {
 
 void runWatchCommand(const WatchCommandOptions &options) {
+    spdlog::info("creating redis storer: {}:{}", options.redis_host, options.redis_port);
     RedisStorer storer{
         options.redis_host,
         options.redis_port,

@@ -26,6 +26,7 @@ void runWatchAllCommand(const WatchAllOptions &options) {
     const auto redis_host = redis_url.substr(0, pos);
     const auto redis_port_string = redis_url.substr(pos+1);
     int redis_port = std::stoi(redis_port_string);
+    spdlog::info("creating redis storer: {}:{}", redis_host, redis_port_string);
     RedisStorer storer{
             redis_host,
             redis_port,
@@ -59,7 +60,7 @@ void runWatchAllCommand(const WatchAllOptions &options) {
                     fmt::arg("key", key));
 
             while (true) {
-                std::this_thread::sleep_for(10s);
+                std::this_thread::sleep_for(30s);
                 auto value = collector.getStatusJsonString();
 
                 spdlog::info("[{}/{}] save nodes...", owner, repo);
