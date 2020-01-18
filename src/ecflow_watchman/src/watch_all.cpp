@@ -62,6 +62,10 @@ void runWatchAllCommand(const WatchAllOptions &options) {
             while (true) {
                 std::this_thread::sleep_for(30s);
                 auto value = collector.getStatusJsonString();
+                if (value.empty()) {
+                    spdlog::warn("[{}/{}] get status failed", owner, repo);
+                    continue;
+                }
 
                 spdlog::info("[{}/{}] save nodes...", owner, repo);
                 storer.save(key, value);

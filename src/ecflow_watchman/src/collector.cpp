@@ -19,7 +19,11 @@ EcflowCollector::EcflowCollector(
 std::string EcflowCollector::getStatusJsonString() {
     spdlog::info("[{}/{}] get nodes...", owner_, repo_);
     EcflowUtil::EcflowClient client{ecflow_host_, ecflow_port_};
-    client.sync();
+    auto result = client.sync();
+    if (result != 0) {
+        spdlog::warn("[{}/{}] get nodes...failed", owner_, repo_);
+        return "";
+    }
     auto records = client.statusRecords();
     auto collected_time = client.collectedTime();
     spdlog::info("[{}/{}] get nodes...done, got {} nodes", owner_, repo_, records.size());
