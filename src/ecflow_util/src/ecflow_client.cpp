@@ -28,6 +28,11 @@ public:
 
         std::vector<WorkflowModel::NodeStatusRecord> records;
 
+        WorkflowModel::NodeStatusRecord root_record;
+        root_record.path_ = "/";
+        root_record.status_ = NState::toString(defs_->state());
+        records.push_back(root_record);
+
         for (auto &node: nodes) {
             WorkflowModel::NodeStatusRecord record;
             record.path_ = node->absNodePath();
