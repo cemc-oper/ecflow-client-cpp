@@ -9,7 +9,13 @@ namespace EcflowUtil {
 class EcflowClientPrivate {
 public:
     EcflowClientPrivate(const std::string &host, const std::string &port) :
-        host_{host}, port_{port} {}
+        host_{host}, port_{port} {
+        invoker_.set_throw_on_error(false);
+    }
+
+    void setConnectTimeout(int time_out) {
+        invoker_.set_connect_timeout(time_out);
+    }
 
     int sync() {
         invoker_.set_host_port(host_, port_);
@@ -120,6 +126,10 @@ EcflowClient::EcflowClient(const std::string &host, const std::string &port) :
 EcflowClient::~EcflowClient() {
     delete p_;
     status_records_.clear();
+}
+
+void EcflowClient::setConnectTimeout(int time_out) {
+    p_->setConnectTimeout(time_out);
 }
 
 int EcflowClient::sync() {

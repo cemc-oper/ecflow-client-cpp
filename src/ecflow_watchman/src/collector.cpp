@@ -19,6 +19,7 @@ EcflowCollector::EcflowCollector(
 std::string EcflowCollector::getStatusJsonString() {
     spdlog::info("[{}/{}] get nodes...", owner_, repo_);
     EcflowUtil::EcflowClient client{ecflow_host_, ecflow_port_};
+    client.setConnectTimeout(connection_timeout_);
     auto result = client.sync();
     if (result != 0) {
         spdlog::warn("[{}/{}] get nodes...failed", owner_, repo_);
@@ -43,6 +44,10 @@ std::string EcflowCollector::getStatusJsonString() {
 
     auto value = value_json.dump();
     return value;
+}
+
+void EcflowCollector::setConnectionTimeout(int timeout) {
+    connection_timeout_ = timeout;
 }
 
 

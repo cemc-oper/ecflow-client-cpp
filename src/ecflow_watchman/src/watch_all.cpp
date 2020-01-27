@@ -52,6 +52,7 @@ void runWatchAllCommand(const WatchAllOptions &options) {
                     task_config["host"].as<std::string>(),
                     task_config["port"].as<std::string>(),
             };
+            collector.setConnectionTimeout(5);
 
             const auto key = fmt::format("{}/{}/status", owner, repo);
             spdlog::info("[{owner}/{repo}] redis key: {key}",

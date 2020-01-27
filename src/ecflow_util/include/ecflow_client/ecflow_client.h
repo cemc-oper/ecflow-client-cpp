@@ -17,6 +17,8 @@ public:
 
     ~EcflowClient();
 
+    void setConnectTimeout(int time_out);
+
     int sync();
 
     std::shared_ptr<WorkflowModel::Bunch> bunch();
