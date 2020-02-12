@@ -7,34 +7,24 @@
 #include "ecflow_client.pb.h"
 
 #include <functional>
+#include <grpc/impl/codegen/port_platform.h>
 #include <grpcpp/impl/codegen/async_generic_service.h>
 #include <grpcpp/impl/codegen/async_stream.h>
 #include <grpcpp/impl/codegen/async_unary_call.h>
 #include <grpcpp/impl/codegen/client_callback.h>
 #include <grpcpp/impl/codegen/client_context.h>
 #include <grpcpp/impl/codegen/completion_queue.h>
-#include <grpcpp/impl/codegen/method_handler_impl.h>
+#include <grpcpp/impl/codegen/message_allocator.h>
+#include <grpcpp/impl/codegen/method_handler.h>
 #include <grpcpp/impl/codegen/proto_utils.h>
 #include <grpcpp/impl/codegen/rpc_method.h>
 #include <grpcpp/impl/codegen/server_callback.h>
+#include <grpcpp/impl/codegen/server_callback_handlers.h>
 #include <grpcpp/impl/codegen/server_context.h>
 #include <grpcpp/impl/codegen/service_type.h>
 #include <grpcpp/impl/codegen/status.h>
 #include <grpcpp/impl/codegen/stub_options.h>
 #include <grpcpp/impl/codegen/sync_stream.h>
-
-namespace grpc_impl {
-class CompletionQueue;
-class ServerCompletionQueue;
-class ServerContext;
-}  // namespace grpc_impl
-
-namespace grpc {
-namespace experimental {
-template <typename RequestT, typename ResponseT>
-class MessageAllocator;
-}  // namespace experimental
-}  // namespace grpc
 
 namespace ecflow_client {
 
@@ -72,17 +62,47 @@ class EcflowClientService final {
       virtual ~experimental_async_interface() {}
       virtual void CollectStatusRecords(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusRecordsResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void CollectStatusRecords(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusRecordsResponse* response, std::function<void(::grpc::Status)>) = 0;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void CollectStatusRecords(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusRecordsResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
       virtual void CollectStatusRecords(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusRecordsResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void CollectStatusRecords(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusRecordsResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
       virtual void CollectStatusRecords(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusRecordsResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
       virtual void CollectStatus(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void CollectStatus(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusResponse* response, std::function<void(::grpc::Status)>) = 0;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void CollectStatus(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
       virtual void CollectStatus(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void CollectStatus(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
       virtual void CollectStatus(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
       virtual void CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response, std::function<void(::grpc::Status)>) = 0;
       virtual void CollectNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::NodeResponse* response, std::function<void(::grpc::Status)>) = 0;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
       virtual void CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void CollectNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::NodeResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
       virtual void CollectNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::NodeResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
     };
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    typedef class experimental_async_interface async_interface;
+    #endif
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    async_interface* async() { return experimental_async(); }
+    #endif
     virtual class experimental_async_interface* experimental_async() { return nullptr; }
   private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::ecflow_client::StatusRecordsResponse>* AsyncCollectStatusRecordsRaw(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest& request, ::grpc::CompletionQueue* cq) = 0;
@@ -121,16 +141,40 @@ class EcflowClientService final {
      public:
       void CollectStatusRecords(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusRecordsResponse* response, std::function<void(::grpc::Status)>) override;
       void CollectStatusRecords(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusRecordsResponse* response, std::function<void(::grpc::Status)>) override;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void CollectStatusRecords(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusRecordsResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
       void CollectStatusRecords(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusRecordsResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void CollectStatusRecords(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusRecordsResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
       void CollectStatusRecords(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusRecordsResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
       void CollectStatus(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response, std::function<void(::grpc::Status)>) override;
       void CollectStatus(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusResponse* response, std::function<void(::grpc::Status)>) override;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void CollectStatus(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
       void CollectStatus(::grpc::ClientContext* context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void CollectStatus(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
       void CollectStatus(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::StatusResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
       void CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response, std::function<void(::grpc::Status)>) override;
       void CollectNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::NodeResponse* response, std::function<void(::grpc::Status)>) override;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
       void CollectNode(::grpc::ClientContext* context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void CollectNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::NodeResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
       void CollectNode(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::ecflow_client::NodeResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
      private:
       friend class Stub;
       explicit experimental_async(Stub* stub): stub_(stub) { }
@@ -229,19 +273,28 @@ class EcflowClientService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithCallbackMethod_CollectStatusRecords() {
-      ::grpc::Service::experimental().MarkMethodCallback(0,
-        new ::grpc_impl::internal::CallbackUnaryHandler< ::ecflow_client::StatusRequest, ::ecflow_client::StatusRecordsResponse>(
-          [this](::grpc::ServerContext* context,
-                 const ::ecflow_client::StatusRequest* request,
-                 ::ecflow_client::StatusRecordsResponse* response,
-                 ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   return this->CollectStatusRecords(context, request, response, controller);
-                 }));
-    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodCallback(0,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::ecflow_client::StatusRequest, ::ecflow_client::StatusRecordsResponse>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusRecordsResponse* response) { return this->CollectStatusRecords(context, request, response); }));}
     void SetMessageAllocatorFor_CollectStatusRecords(
         ::grpc::experimental::MessageAllocator< ::ecflow_client::StatusRequest, ::ecflow_client::StatusRecordsResponse>* allocator) {
-      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::ecflow_client::StatusRequest, ::ecflow_client::StatusRecordsResponse>*>(
-          ::grpc::Service::experimental().GetHandler(0))
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
+    #else
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(0);
+    #endif
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::ecflow_client::StatusRequest, ::ecflow_client::StatusRecordsResponse>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~ExperimentalWithCallbackMethod_CollectStatusRecords() override {
@@ -252,7 +305,14 @@ class EcflowClientService final {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void CollectStatusRecords(::grpc::ServerContext* /*context*/, const ::ecflow_client::StatusRequest* /*request*/, ::ecflow_client::StatusRecordsResponse* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* CollectStatusRecords(
+      ::grpc::CallbackServerContext* /*context*/, const ::ecflow_client::StatusRequest* /*request*/, ::ecflow_client::StatusRecordsResponse* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* CollectStatusRecords(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::ecflow_client::StatusRequest* /*request*/, ::ecflow_client::StatusRecordsResponse* /*response*/)
+    #endif
+      { return nullptr; }
   };
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_CollectStatus : public BaseClass {
@@ -260,19 +320,28 @@ class EcflowClientService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithCallbackMethod_CollectStatus() {
-      ::grpc::Service::experimental().MarkMethodCallback(1,
-        new ::grpc_impl::internal::CallbackUnaryHandler< ::ecflow_client::StatusRequest, ::ecflow_client::StatusResponse>(
-          [this](::grpc::ServerContext* context,
-                 const ::ecflow_client::StatusRequest* request,
-                 ::ecflow_client::StatusResponse* response,
-                 ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   return this->CollectStatus(context, request, response, controller);
-                 }));
-    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodCallback(1,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::ecflow_client::StatusRequest, ::ecflow_client::StatusResponse>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::ecflow_client::StatusRequest* request, ::ecflow_client::StatusResponse* response) { return this->CollectStatus(context, request, response); }));}
     void SetMessageAllocatorFor_CollectStatus(
         ::grpc::experimental::MessageAllocator< ::ecflow_client::StatusRequest, ::ecflow_client::StatusResponse>* allocator) {
-      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::ecflow_client::StatusRequest, ::ecflow_client::StatusResponse>*>(
-          ::grpc::Service::experimental().GetHandler(1))
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
+    #else
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(1);
+    #endif
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::ecflow_client::StatusRequest, ::ecflow_client::StatusResponse>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~ExperimentalWithCallbackMethod_CollectStatus() override {
@@ -283,7 +352,14 @@ class EcflowClientService final {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void CollectStatus(::grpc::ServerContext* /*context*/, const ::ecflow_client::StatusRequest* /*request*/, ::ecflow_client::StatusResponse* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* CollectStatus(
+      ::grpc::CallbackServerContext* /*context*/, const ::ecflow_client::StatusRequest* /*request*/, ::ecflow_client::StatusResponse* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* CollectStatus(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::ecflow_client::StatusRequest* /*request*/, ::ecflow_client::StatusResponse* /*response*/)
+    #endif
+      { return nullptr; }
   };
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_CollectNode : public BaseClass {
@@ -291,19 +367,28 @@ class EcflowClientService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithCallbackMethod_CollectNode() {
-      ::grpc::Service::experimental().MarkMethodCallback(2,
-        new ::grpc_impl::internal::CallbackUnaryHandler< ::ecflow_client::NodeRequest, ::ecflow_client::NodeResponse>(
-          [this](::grpc::ServerContext* context,
-                 const ::ecflow_client::NodeRequest* request,
-                 ::ecflow_client::NodeResponse* response,
-                 ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   return this->CollectNode(context, request, response, controller);
-                 }));
-    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodCallback(2,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::ecflow_client::NodeRequest, ::ecflow_client::NodeResponse>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::ecflow_client::NodeRequest* request, ::ecflow_client::NodeResponse* response) { return this->CollectNode(context, request, response); }));}
     void SetMessageAllocatorFor_CollectNode(
         ::grpc::experimental::MessageAllocator< ::ecflow_client::NodeRequest, ::ecflow_client::NodeResponse>* allocator) {
-      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::ecflow_client::NodeRequest, ::ecflow_client::NodeResponse>*>(
-          ::grpc::Service::experimental().GetHandler(2))
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
+    #else
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(2);
+    #endif
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::ecflow_client::NodeRequest, ::ecflow_client::NodeResponse>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~ExperimentalWithCallbackMethod_CollectNode() override {
@@ -314,8 +399,19 @@ class EcflowClientService final {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void CollectNode(::grpc::ServerContext* /*context*/, const ::ecflow_client::NodeRequest* /*request*/, ::ecflow_client::NodeResponse* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* CollectNode(
+      ::grpc::CallbackServerContext* /*context*/, const ::ecflow_client::NodeRequest* /*request*/, ::ecflow_client::NodeResponse* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* CollectNode(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::ecflow_client::NodeRequest* /*request*/, ::ecflow_client::NodeResponse* /*response*/)
+    #endif
+      { return nullptr; }
   };
+  #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+  typedef ExperimentalWithCallbackMethod_CollectStatusRecords<ExperimentalWithCallbackMethod_CollectStatus<ExperimentalWithCallbackMethod_CollectNode<Service > > > CallbackService;
+  #endif
+
   typedef ExperimentalWithCallbackMethod_CollectStatusRecords<ExperimentalWithCallbackMethod_CollectStatus<ExperimentalWithCallbackMethod_CollectNode<Service > > > ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_CollectStatusRecords : public BaseClass {
@@ -434,14 +530,20 @@ class EcflowClientService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithRawCallbackMethod_CollectStatusRecords() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(0,
-        new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
-          [this](::grpc::ServerContext* context,
-                 const ::grpc::ByteBuffer* request,
-                 ::grpc::ByteBuffer* response,
-                 ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->CollectStatusRecords(context, request, response, controller);
-                 }));
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodRawCallback(0,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CollectStatusRecords(context, request, response); }));
     }
     ~ExperimentalWithRawCallbackMethod_CollectStatusRecords() override {
       BaseClassMustBeDerivedFromService(this);
@@ -451,7 +553,14 @@ class EcflowClientService final {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void CollectStatusRecords(::grpc::ServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* CollectStatusRecords(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* CollectStatusRecords(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #endif
+      { return nullptr; }
   };
   template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_CollectStatus : public BaseClass {
@@ -459,14 +568,20 @@ class EcflowClientService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithRawCallbackMethod_CollectStatus() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(1,
-        new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
-          [this](::grpc::ServerContext* context,
-                 const ::grpc::ByteBuffer* request,
-                 ::grpc::ByteBuffer* response,
-                 ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->CollectStatus(context, request, response, controller);
-                 }));
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodRawCallback(1,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CollectStatus(context, request, response); }));
     }
     ~ExperimentalWithRawCallbackMethod_CollectStatus() override {
       BaseClassMustBeDerivedFromService(this);
@@ -476,7 +591,14 @@ class EcflowClientService final {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void CollectStatus(::grpc::ServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* CollectStatus(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* CollectStatus(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #endif
+      { return nullptr; }
   };
   template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_CollectNode : public BaseClass {
@@ -484,14 +606,20 @@ class EcflowClientService final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     ExperimentalWithRawCallbackMethod_CollectNode() {
-      ::grpc::Service::experimental().MarkMethodRawCallback(2,
-        new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
-          [this](::grpc::ServerContext* context,
-                 const ::grpc::ByteBuffer* request,
-                 ::grpc::ByteBuffer* response,
-                 ::grpc::experimental::ServerCallbackRpcController* controller) {
-                   this->CollectNode(context, request, response, controller);
-                 }));
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodRawCallback(2,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CollectNode(context, request, response); }));
     }
     ~ExperimentalWithRawCallbackMethod_CollectNode() override {
       BaseClassMustBeDerivedFromService(this);
@@ -501,7 +629,14 @@ class EcflowClientService final {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual void CollectNode(::grpc::ServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/, ::grpc::experimental::ServerCallbackRpcController* controller) { controller->Finish(::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "")); }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* CollectNode(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* CollectNode(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #endif
+      { return nullptr; }
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_CollectStatusRecords : public BaseClass {
