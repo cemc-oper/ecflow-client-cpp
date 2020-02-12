@@ -7,7 +7,7 @@
 #include <iostream>
 
 int main(int argc, char **argv) {
-    CLI::App app{"A gRPC client for ecflow"};
+    CLI::App app{"A client to get ecFlow's node status from ecflow_grpc_server"};
 
     std::string rpc_target;
     std::string host;
