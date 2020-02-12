@@ -29,15 +29,16 @@ install(TARGETS workflow_model ecflow_util ecflow_watchman Ecflow
     RUNTIME DESTINATION bin
     INCLUDES DESTINATION include
     )
-if(ENABLE_SERVER)
-    install(TARGETS ecflow_grpc_server Ecflow
-        EXPORT EcflowClientCppTargets
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib
-        RUNTIME DESTINATION bin
-        INCLUDES DESTINATION include
-    )
-endif()
+
+#if(ENABLE_SERVER)
+#    install(TARGETS ecflow_grpc_server Ecflow
+#        EXPORT EcflowClientCppTargets
+#        LIBRARY DESTINATION lib
+#        ARCHIVE DESTINATION lib
+#        RUNTIME DESTINATION bin
+#        INCLUDES DESTINATION include
+#    )
+#endif()
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
