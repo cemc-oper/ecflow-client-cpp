@@ -20,6 +20,8 @@ public:
     void save(const std::string &key, const std::string &value);
 
 private:
+    void tryToCreate();
+
     std::string redis_host_;
     int redis_port_;
     std::string password_;
